@@ -44,7 +44,7 @@ export default function AppBootstrap({children}: AppBootstrapProps): ReactElemen
       }, [appIsReady]);
     
       if (!appIsReady) {
-        SplashScreen.preventAutoHideAsync();
+        <Text>SplashScreen Demo! 👋</Text>
       }
     
       return (
