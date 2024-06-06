@@ -1,3 +1,7 @@
+import App from "./src/index";
+export default App; 
+
+/*
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 import React, { useState } from 'react';
@@ -13,3 +17,4 @@ export default function App() {
   );
 }
 
+*/
