@@ -2,9 +2,14 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create ({
 container: {
-    flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+},
+logo: {
+    height: 150,
+    maxWidth: '90%',
+    resizeMode: 'contain',
+    marginTop: 100,
+    marginBottom: 50
 }
 
 });

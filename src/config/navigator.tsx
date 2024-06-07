@@ -4,16 +4,20 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Home, Game } from "../screens";
 
 export type StackNavigatorParams = {
-    Home : undefined;
-    Game : {gameId: string};
-}
+  Home: undefined;
+  Game: { gameId: string };
+};
 
 const Stack = createStackNavigator<StackNavigatorParams>();
 
 export default function Navigator(): ReactElement {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Game">
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Game" component={Game} />
       </Stack.Navigator>
