@@ -18,10 +18,10 @@ export default function Home({ navigation }: HomeProps): ReactElement {
           source={require("../../../assets/images/logo.png")}
         />
         <View>
-          <MyButton title="Single PLayer"  />
-          <MyButton title="Multi PLayer"  />
-          <MyButton title="Login"  />
-          <MyButton title="Settings"  />
+          <MyButton title="Single PLayer" style={styles.button} />
+          <MyButton title="Multi PLayer" style={styles.button} />
+          <MyButton title="Login" style={styles.button} />
+          <MyButton title="Settings" style={styles.button} />
         </View>
       </ScrollView>
     </GradienBackground>

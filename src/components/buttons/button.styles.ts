@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 30,
     height: 45,
-    margin: 10
     },
     buttonText : { 
         fontFamily: "DeliusUnicase-Bold",

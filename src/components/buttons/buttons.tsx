@@ -6,9 +6,9 @@ type MyButtonProps = {
     title: string;
 } & TouchableOpacityProps
 
-export default function MyButton({title, ...props}: MyButtonProps): ReactElement {
+export default function MyButton({title, style, ...props}: MyButtonProps): ReactElement {
   return (
-        <TouchableOpacity {...props} style ={styles.button}>
+        <TouchableOpacity {...props} style ={[styles.button, style]}>
             <Text style={styles.buttonText}>{title}</Text>
           </TouchableOpacity>
   )
