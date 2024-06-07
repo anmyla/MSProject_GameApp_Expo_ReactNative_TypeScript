@@ -1,59 +1,53 @@
-import { View, Text, useColorScheme } from 'react-native';
-import React, { ReactElement, ReactNode, useCallback, useEffect, useState, useTransition } from 'react';
-import Entypo from '@expo/vector-icons/Entypo';
-import * as SplashScreen from 'expo-splash-screen';
-import * as Font from 'expo-font';
+import React, {
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import { View } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
+import { useFonts } from "expo-font";
 
 type AppBootstrapProps = {
-    children: ReactNode;
-}
+  children: ReactNode;
+};
 
-// Keep the splash screen visible while we fetch resources
-SplashScreen.preventAutoHideAsync();
+export default function AppBootstrap({
+  children,
+}: AppBootstrapProps): ReactElement {
+  const [fontsLoaded] = useFonts({
+    "DeliusUnicase-Bold": require("../../../assets/fonts/DeliusUnicase-Bold.ttf"),
+  });
 
-export default function AppBootstrap({children}: AppBootstrapProps): ReactElement {
-    const [appIsReady, setAppIsReady] = useState(false);
-    useEffect(() => {
-        async function prepare() {
-          try {
-            // Pre-load fonts, make any API calls you need to do here
-            await Font.loadAsync(Entypo.font);
-            // Artificially delay for two seconds to simulate a slow loading
-            // experience. Please remove this if you copy and paste the code!
-            await new Promise(resolve => setTimeout(resolve, 2000));
-          } catch (e) {
-            console.warn(e);
-          } finally {
-            // Tell the application to render
-            setAppIsReady(true);
-          }
-        }
-    
-        prepare();
-      }, []);
-    
-      const onLayoutRootView = useCallback(async () => {
-        if (appIsReady) {
-          // This tells the splash screen to hide immediately! If we call this after
-          // `setAppIsReady`, then we may see a blank screen while the app is
-          // loading its initial state and rendering its first pixels. So instead,
-          // we hide the splash screen once we know the root view has already
-          // performed layout.
-          await SplashScreen.hideAsync();
-        }
-      }, [appIsReady]);
-    
-      if (!appIsReady) {
-        <Text>SplashScreen Demo! 👋</Text>
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        // Keep the splash screen visible while we fetch resources
+        await SplashScreen.preventAutoHideAsync();
+      } catch (e) {
+        console.warn(e);
       }
-    
-      return (
-        <View
-          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
-          onLayout={onLayoutRootView}>
-          <Text>SplashScreen Demo! 👋</Text>
-          <Entypo name="rocket" size={30} />
-        </View>
-      );
-    
+    }
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      setAppIsReady(true);
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return <View />;
+  }
+
+  return (
+    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+      {appIsReady && children}
+    </View>
+  );
 }

@@ -1,6 +1,4 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Image } from "react-native";
-import { Game, Home } from "./screens";
 import { AppBootStrap } from "./components";
 import Navigator from "./config/navigator";
 

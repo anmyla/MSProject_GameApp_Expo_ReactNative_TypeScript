@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./Styles";
-import { SquareProps } from "../IProps";
+import { SquareProps } from '../IProps'
 
 const Square:  React.FC<SquareProps> = ({ value, onSquareClick }) => {
     return (

@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import Square from "./Square";
 import { styles } from "./Styles";
-import { BoardProps } from "../IProps";
+import { BoardProps } from '../IProps'
 
 export function calculateWinner(squares: (string | null)[]) {
   const lines = [
