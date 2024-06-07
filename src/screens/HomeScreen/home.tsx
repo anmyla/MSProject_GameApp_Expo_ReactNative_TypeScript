@@ -13,9 +13,15 @@ export default function Home({ navigation }: HomeProps): ReactElement {
   return (
     <GradienBackground>
       <ScrollView contentContainerStyle={styles.container}>
-         <Image style= {styles.logo} source={require('../../../assets/images/logo.png')}/>
-        <View >
-          <MyButton />
+        <Image
+          style={styles.logo}
+          source={require("../../../assets/images/logo.png")}
+        />
+        <View>
+          <MyButton title="Single PLayer"  />
+          <MyButton title="Multi PLayer"  />
+          <MyButton title="Login"  />
+          <MyButton title="Settings"  />
         </View>
       </ScrollView>
     </GradienBackground>

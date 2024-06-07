@@ -8,7 +8,7 @@ logo: {
     height: 150,
     maxWidth: '90%',
     resizeMode: 'contain',
-    marginTop: 100,
+    marginTop: 150,
     marginBottom: 50
 }
 
