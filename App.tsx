@@ -1,5 +1,5 @@
 import App from "./src/index";
-export default App; 
+export default App;
 
 /*
 import { StatusBar } from 'expo-status-bar';
