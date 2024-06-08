@@ -1,12 +1,7 @@
 import { Text, TouchableOpacity } from "react-native";
 import  styles  from "./square.styles";
 import { ReactElement } from "react";
-
-
-type SquareProps = {
-    value: string | null;
-    onSquareClick: () => void;
-  }
+import { SquareProps } from "../../utils";
 
 export default function Square({ value, onSquareClick }: SquareProps): ReactElement
  {
@@ -16,26 +11,3 @@ export default function Square({ value, onSquareClick }: SquareProps): ReactElem
       </TouchableOpacity>
     );
   }
-
-
-
-
-
-
-
-/*
-import { View, Text, TouchableOpacity } from "react-native";
-import { styles } from "./Styles";
-import { SquareProps } from '../IProps'
-
-const Square:  React.FC<SquareProps> = ({ value, onSquareClick }) => {
-    return (
-      <TouchableOpacity style={styles.square} onPress={onSquareClick}>
-        <Text style={styles.squareText}>{value}</Text>
-      </TouchableOpacity>
-    );
-  }
-  
-  export default Square;
-
-  */

@@ -1,11 +1,26 @@
 import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { ReactElement, useState } from "react";
-import Board, { calculateWinner, isBoardFull } from "../game-board/board";
+import Board, { calculateWinner } from "../game-board/board";
 import styles from "./game.styles";
+import { BoardProps } from "../../utils";
+import { isBoardFull, printFormattedBoard, isTerminal } from "../../utils/board";
 
 type GameProps = {} 
 
 export default function Game({}:GameProps): ReactElement{
+
+    //for debugging purposes
+    const boardState: BoardProps = {
+        xIsNext: true,
+        squares: [null, 'X', 'O', 'X', null, 'O', 'X', 'X', 'O'],
+        onPlay: (squares: (string | null)[]) => {}
+      };
+      
+      printFormattedBoard(boardState.squares);
+      console.log(isTerminal(boardState.squares));
+
+    //-----------------------  
+
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
   const xIsNext = currentMove % 2 === 0;
