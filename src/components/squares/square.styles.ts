@@ -16,6 +16,11 @@ const styles = StyleSheet.create ({
         fontWeight: 'bold',
         color: '#000',
       },
+      highlightedSquare: {
+        backgroundColor: "#A39CD4", 
+        //transform: [{ scale: 1.2 }], 
+      },
+      
 });
 
 export default styles;

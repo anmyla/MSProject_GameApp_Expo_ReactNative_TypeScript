@@ -53,35 +53,35 @@ export default function useSounds(): (sound: SoundType) => void {
 
         const loadSounds = async () => {
           try {
-            await popSoundObject.loadAsync(require("../../../assets/sounds/pop_1.wav"));
+            await popSoundObject.loadAsync(require("../../assets/sounds/pop_1.wav"));
             popSoundRef.current = popSoundObject;
           } catch (error) {
             console.log("Error loading pop_1.wav: " + error);
           }
       
           try {
-            await popSoundObject2.loadAsync(require("../../../assets/sounds/pop_2.wav"));
+            await popSoundObject2.loadAsync(require("../../assets/sounds/pop_2.wav"));
             popSoundRef2.current = popSoundObject2;
           } catch (error) {
             console.log("Error loading pop_2.wav: " + error);
           }
       
           try {
-            await popSoundObjectWin.loadAsync(require("../../../assets/sounds/win.mp3"));
+            await popSoundObjectWin.loadAsync(require("../../assets/sounds/win.mp3"));
             popSoundRefWin.current = popSoundObjectWin;
           } catch (error) {
             console.log("Error loading win.mp3: " + error);
           }
       
           try {
-            await popSoundObjectLoss.loadAsync(require("../../../assets/sounds/loss.mp3"));
+            await popSoundObjectLoss.loadAsync(require("../../assets/sounds/loss.mp3"));
             popSoundRefLoss.current = popSoundObjectLoss;
           } catch (error) {
             console.log("Error loading loss.mp3: " + error);
           }
       
           try {
-            await popSoundObjectDraw.loadAsync(require("../../../assets/sounds/draw.mp3"));
+            await popSoundObjectDraw.loadAsync(require("../../assets/sounds/draw.mp3"));
             popSoundRefDraw.current = popSoundObjectDraw;
           } catch (error) {
             console.log("Error loading draw.mp3: " + error);

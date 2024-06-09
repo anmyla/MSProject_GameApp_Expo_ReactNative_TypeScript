@@ -65,15 +65,15 @@ export default function Game({}: GameProps): ReactElement {
       const winner = getWinner(gameResult.winner);
       if (winner === "HUMAN") {
         playSound("win");
-        alert("You won! :)");
+        //alert("You won! :)");
       }
       if (winner === "BOT") {
         playSound("loss");
-        alert("You lost! :(");
+        //alert("You lost! :(");
       }
       if (winner === "DRAW") {
         playSound("draw");
-        alert("It's a draw!");
+        //alert("It's a draw!");
       }
     } else if (turn === "BOT") {
       if (isBoardEmpty(state)) {

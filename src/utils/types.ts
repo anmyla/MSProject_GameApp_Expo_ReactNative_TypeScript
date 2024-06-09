@@ -1,6 +1,7 @@
 export type SquareProps = {
     value: string | null;
     onSquareClick: () => void;
+    highlight? : boolean;
   }
 
 export type BoardProps = {
@@ -21,4 +22,5 @@ export type BoardResult = {
     column?: 1 | 2 | 3;
     row?: 1 | 2 | 3;
     diagonal?: 'Main' | 'Counter';
+    line?: number[];
 }
