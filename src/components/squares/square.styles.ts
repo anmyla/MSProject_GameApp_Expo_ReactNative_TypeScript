@@ -18,7 +18,6 @@ const styles = StyleSheet.create ({
       },
       highlightedSquare: {
         backgroundColor: "#A39CD4", 
-        //transform: [{ scale: 1.2 }], 
       },
       
 });

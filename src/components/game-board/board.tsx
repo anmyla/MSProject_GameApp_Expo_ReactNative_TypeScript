@@ -52,7 +52,6 @@ export default function Board({
 
   return (
     <View>
-      <Text style={styles.status}>{winner ? `Winner: ${winner}` : "Next player"}</Text>
       <View style={styles.boardRow}>
         {renderSquare(0)}
         {renderSquare(1)}

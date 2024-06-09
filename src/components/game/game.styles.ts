@@ -30,16 +30,6 @@ const styles = StyleSheet.create ({
       gameBoard: {
         marginBottom: 5,
       },
-      title: {
-        fontSize: 50,
-        borderWidth: 1,
-        borderColor: '#999',
-        paddingLeft: 10,
-        paddingRight: 10,
-        alignSelf: 'center',
-        marginBottom: 5,
-        color: '#fff',
-      }
 
 });
 

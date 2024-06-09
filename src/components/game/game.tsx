@@ -93,7 +93,6 @@ export default function Game({}: GameProps): ReactElement {
   return (
     <View style={styles.game}>
       <View style={styles.gameBoard}>
-        <Text style={styles.title}>TicTacToe</Text>
         <Board
           disabled={Boolean(isTerminal(state)) || turn !== "HUMAN"}
           state={state}
