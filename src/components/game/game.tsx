@@ -3,21 +3,20 @@ import { ReactElement, useState } from "react";
 import Board, { calculateWinner } from "../game-board/board";
 import styles from "./game.styles";
 import { BoardProps } from "../../utils";
-import { isBoardFull, printFormattedBoard, isTerminal } from "../../utils/board";
+import { isBoardFull, printFormattedBoard, isTerminal, getBestMove } from "../../utils";
 
 type GameProps = {} 
 
 export default function Game({}:GameProps): ReactElement{
-
     //for debugging purposes
-    const boardState: BoardProps = {
-        xIsNext: true,
-        squares: [null, 'X', 'O', 'X', null, 'O', 'X', 'X', 'O'],
-        onPlay: (squares: (string | null)[]) => {}
-      };
-      
-      printFormattedBoard(boardState.squares);
-      console.log(`\n\nTerminal state: ${JSON.stringify(isTerminal(boardState.squares))}`);
+    const[state, setState] = useState<BoardProps['squares']>([
+        null, 'X', null,
+        'O', null, 'X',
+        '0', '0', 'X'
+    ])
+      console.log("BEST MOVE : " + getBestMove(state, true))
+      printFormattedBoard(state);
+      console.log(`\n\nTerminal state: ${JSON.stringify(isTerminal(state))}`);
 
     //-----------------------  
 

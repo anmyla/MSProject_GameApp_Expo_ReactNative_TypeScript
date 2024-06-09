@@ -33,15 +33,7 @@ export function calculateWinner(squares: (string | null)[]) {
 }
 
 
-export const getAvailableMoves = (squares: (string | null)[]) => {
-  const moves: Moves[] = [];
-  squares.forEach((square, index) => {
-    if(square === null){
-      moves.push(index as Moves);
-    }
-  })
-  return moves;
-}
+
 
 export default function Board({ xIsNext, squares, onPlay }: BoardProps): ReactElement {
   function handleClick(i: number) {

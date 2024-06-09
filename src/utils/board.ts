@@ -26,6 +26,15 @@ export const printFormattedBoard = (state: BoardProps["squares"]): void => {
     console.log('\n\n' + formattedString);
   }
   
+export const getAvailableMoves = (squares: (string | null)[]) => {
+    const moves: Moves[] = [];
+    squares.forEach((square, index) => {
+      if(square === null){
+        moves.push(index as Moves);
+      }
+    })
+    return moves;
+  }  
 
 export const isTerminal = (state: BoardProps["squares"]): BoardResult | false => {
     if(isBoardEmpty(state)) return false;
