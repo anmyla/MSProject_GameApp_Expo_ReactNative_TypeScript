@@ -3,15 +3,15 @@ import { isTerminal, getAvailableMoves, printFormattedBoard } from "./board";
 
 
 
-export const getBestMove = (state: BoardProps['squares'], maximizing : boolean, depth = 0): number => {
+export const getBestMove = (state: BoardProps['squares'], maximizing : boolean, depth = 0, maxDepth = -1): number => {
 const childValues: {[key: string] : string} = {};
 
-const getBestMoveRecursive = (state: BoardProps['squares'], maximizing : boolean, depth = 0): number => {    
+const getBestMoveRecursive = (state: BoardProps['squares'], maximizing : boolean, depth = 0, maxDepth = -1): number => {    
     const terminalObject = isTerminal(state);
-    if(terminalObject) {
-        if(terminalObject.winner === 'X') {
+    if(terminalObject || depth === maxDepth) {
+        if(terminalObject && terminalObject.winner === 'X') {
             return 100 -depth;
-        } else if(terminalObject.winner=== 'O') {
+        } else if(terminalObject && terminalObject.winner=== 'O') {
             return - 100 + depth;
         } else {
             return 0;
@@ -23,7 +23,7 @@ const getBestMoveRecursive = (state: BoardProps['squares'], maximizing : boolean
         getAvailableMoves(state).forEach(index => {
             const child: BoardProps['squares'] = [...state];
             child[index] = 'X';
-            const childValue = getBestMoveRecursive(child, false, depth + 1);
+            const childValue = getBestMoveRecursive(child, false, depth + 1, maxDepth );
             best = Math.max(best, childValue);
             if(depth === 0) {
                 childValues[childValue] = childValues[childValue] ? `${childValues[childValue]}, ${index}`: `${index}`;
@@ -35,13 +35,12 @@ const getBestMoveRecursive = (state: BoardProps['squares'], maximizing : boolean
             return parseInt(arr[rand]);
         } 
         return best;
-    };
-    if(!maximizing) {
+    }else {
         let best = 100;
         getAvailableMoves(state).forEach(index => {
             const child: BoardProps['squares'] = [...state];
             child[index] = 'O';
-            const childValue = getBestMove(child, true, depth + 1);
+            const childValue = getBestMoveRecursive(child, true, depth + 1, maxDepth);
             best = Math.min(best, childValue);
             if(depth === 0) {
                 childValues[childValue] = childValues[childValue] ? `${childValues[childValue]}, ${index}`: `${index}`;
@@ -54,8 +53,6 @@ const getBestMoveRecursive = (state: BoardProps['squares'], maximizing : boolean
         }
         return best;
     };
-
-    return 0;
-};
-return getBestMoveRecursive(state, maximizing, depth);
+ };
+return getBestMoveRecursive(state, maximizing, depth, maxDepth);
 };
