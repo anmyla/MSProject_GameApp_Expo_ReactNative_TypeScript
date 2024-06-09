@@ -17,7 +17,7 @@ export default function Game({}:GameProps): ReactElement{
       };
       
       printFormattedBoard(boardState.squares);
-      console.log(isTerminal(boardState.squares));
+      console.log(`\n\nTerminal state: ${JSON.stringify(isTerminal(boardState.squares))}`);
 
     //-----------------------  
 

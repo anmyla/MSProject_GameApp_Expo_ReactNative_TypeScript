@@ -23,7 +23,7 @@ export const printFormattedBoard = (state: BoardProps["squares"]): void => {
       }
     });
   
-    console.log(formattedString);
+    console.log('\n\n' + formattedString);
   }
   
 
