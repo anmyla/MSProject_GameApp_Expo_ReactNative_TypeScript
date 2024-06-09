@@ -12,6 +12,7 @@ status: {
     color: '#fff',
 },
 
+
 });
 
 export default styles;
