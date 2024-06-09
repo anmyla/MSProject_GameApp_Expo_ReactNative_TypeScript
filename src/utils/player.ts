@@ -1,8 +1,6 @@
 import { BoardProps, BoardState } from "./types";
 import { isTerminal, getAvailableMoves, printFormattedBoard } from "./board";
 
-
-
 export const getBestMove = (state: BoardState, maximizing : boolean, depth = 0, maxDepth = -1): number => {
 const childValues: {[key: string] : string} = {};
 
