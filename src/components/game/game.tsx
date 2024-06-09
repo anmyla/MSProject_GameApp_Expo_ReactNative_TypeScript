@@ -2,23 +2,32 @@ import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { ReactElement, useState } from "react";
 import Board, { calculateWinner } from "../game-board/board";
 import styles from "./game.styles";
-import { BoardProps } from "../../utils";
+import { BoardState } from "../../utils";
 import { isBoardFull, printFormattedBoard, isTerminal, getBestMove } from "../../utils";
+import GradienBackground from "../gradient-background/gradient-background";
 
 type GameProps = {} 
 
 export default function Game({}:GameProps): ReactElement{
-    //for debugging purposes
-    const[state, setState] = useState<BoardProps['squares']>([
-        null, 'X', null,
-        'O', null, 'X',
-        '0', '0', 'X'
-    ])
-      console.log("BEST MOVE : " + getBestMove(state, true))
+
+    const[state, setState] = useState<BoardState>([
+        null, null, null,
+        null, null, null,
+        null, null, null,
+    ]);
+
+    const [turn, setTurn]= useState<'HUMAN' | 'BOT'>(Math.random() < 0.5 ? 'HUMAN' : 'BOT');
+
+
+
+
+//for debugging purposes
+    console.log("BEST MOVE : " + getBestMove(state, true))
       printFormattedBoard(state);
       console.log(`\n\nTerminal state: ${JSON.stringify(isTerminal(state))}`);
+//-----------------------  
 
-    //-----------------------  
+
 
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
