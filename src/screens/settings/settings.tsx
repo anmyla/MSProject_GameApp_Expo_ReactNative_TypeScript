@@ -1,17 +1,49 @@
 import { View, Text, ScrollView, TouchableOpacity, Switch } from "react-native";
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { GradienBackground } from "../../components";
 import styles from "./settings.styles";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function Settings(): ReactElement {
-  const [state, setState] = useState(false);
-
-  const difficulty = {
+const difficulty = {
     "1": "Beginner",
     "3": "Intermediate",
     "4": "Hard",
     "-1": "Impossible",
   };
+
+  type SettingsType = {
+    difficulty: keyof typeof difficulty;
+    haptics: boolean;
+    sounds: boolean
+  };
+
+  const defaultSettings: SettingsType = {
+    difficulty: '1',
+    haptics: true,
+    sounds: true
+  };
+
+
+export default function Settings(): ReactElement | null {
+  const [settings, setSettings] = useState<SettingsType | null>(null);
+
+  const loadSettins = async() => {
+    try {
+        const settings = await AsyncStorage.getItem('@settings');
+        settings !== null ? setSettings(JSON.parse(settings)) : setSettings(defaultSettings);
+    }catch (error) {
+        setSettings(defaultSettings);
+    }
+  };
+
+  useEffect(() => {
+    loadSettins();
+  }, []);
+
+  if(!settings) {
+    return null;
+  };
+
 
   return (
     <GradienBackground>
@@ -21,7 +53,10 @@ export default function Settings(): ReactElement {
           <View style={styles.choices}>
             {Object.keys(difficulty).map((level) => {
               return (
-                <TouchableOpacity style={styles.choice} key={level}>
+                <TouchableOpacity style={[styles.choice, 
+                { backgroundColor: 
+                  settings.difficulty === level ? '#705B96' : '#171716'
+                }]} key={level}>
                   <Text style={styles.choiceText}>
                     {difficulty[level as keyof typeof difficulty]}
                   </Text>
@@ -38,10 +73,10 @@ export default function Settings(): ReactElement {
               true: "#ffffff",
             }}
             thumbColor={"#705B96"}
-            value={state}
-            onValueChange={() => {
-              setState(!state);
-            }}
+            value={settings.sounds}
+            // onValueChange={() => {
+            //   setState(!state);
+            // }}
           />
         </View>
         <View style={[styles.field, styles.switch]}>
@@ -52,10 +87,10 @@ export default function Settings(): ReactElement {
               true: "#ffffff",
             }}
             thumbColor={"#705B96"}
-            value={state}
-            onValueChange={() => {
-              setState(!state);
-            }}
+            value={settings.haptics}
+            // onValueChange={() => {
+            //   setState(!settings.haptics);
+            // }}
           />
         </View>
       </ScrollView>

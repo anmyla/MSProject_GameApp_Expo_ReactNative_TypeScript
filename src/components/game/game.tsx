@@ -19,9 +19,8 @@ export default function Game({}: GameProps): ReactElement {
   const [winsCount, setWinsCount] = useState({
     wins: 0,
     losses: 0,
-    draws: 0
-  })
-
+    draws: 0,
+  });
 
   const playSound = useSounds();
 
@@ -58,7 +57,7 @@ export default function Game({}: GameProps): ReactElement {
     setTurn("BOT");
   };
 
- const getWinner = (winnerSymbol: Square): "HUMAN" | "BOT" | "DRAW" => {
+  const getWinner = (winnerSymbol: Square): "HUMAN" | "BOT" | "DRAW" => {
     if (winnerSymbol === "X") {
       return isHumanMaximizing ? "HUMAN" : "BOT";
     } else if (winnerSymbol === "O") {
@@ -68,25 +67,24 @@ export default function Game({}: GameProps): ReactElement {
     }
   };
 
- const newGame = () => {
+  const newGame = () => {
     setState(Array(9).fill(null));
     setTurn(Math.random() < 0.5 ? "HUMAN" : "BOT");
-  
- } 
+  };
   useEffect(() => {
     if (gameResult) {
       const winner = getWinner(gameResult.winner);
       if (winner === "HUMAN") {
         playSound("win");
-        setWinsCount({...winsCount, wins: winsCount.wins +1})
+        setWinsCount({ ...winsCount, wins: winsCount.wins + 1 });
       }
       if (winner === "BOT") {
         playSound("loss");
-        setWinsCount({...winsCount, losses: winsCount.losses +1})
+        setWinsCount({ ...winsCount, losses: winsCount.losses + 1 });
       }
       if (winner === "DRAW") {
         playSound("draw");
-        setWinsCount({...winsCount, draws: winsCount.draws +1})
+        setWinsCount({ ...winsCount, draws: winsCount.draws + 1 });
       }
     } else if (turn === "BOT") {
       if (isBoardEmpty(state)) {
@@ -105,25 +103,25 @@ export default function Game({}: GameProps): ReactElement {
 
   return (
     <View style={styles.game}>
-          <View>
-         <Text style= {styles.title}>TICTACTOE</Text>
-    </View> 
-      <View style= {styles.difficulty}>
-         <Text style= {styles.difficultyText}>Difficulty: Hard</Text>
-      </View>   
-      <View style = {styles.results}>
-            <View style={styles.resultsBox}>
-              <Text style = {styles.resultsBoxText}>Wins</Text>
-              <Text style = {styles.resultsBoxCount}>{winsCount.wins}</Text>
-            </View>
-            <View style={styles.resultsBox}>
-              <Text style = {styles.resultsBoxText}>Draws</Text>
-              <Text style = {styles.resultsBoxCount}>{winsCount.losses}</Text>
-            </View>
-            <View style={styles.resultsBox}>
-              <Text style = {styles.resultsBoxText}>Losses</Text>
-              <Text style = {styles.resultsBoxCount}>{winsCount.draws}</Text>
-            </View>
+      <View>
+        <Text style={styles.title}>TICTACTOE</Text>
+      </View>
+      <View style={styles.difficulty}>
+        <Text style={styles.difficultyText}>Difficulty: Hard</Text>
+      </View>
+      <View style={styles.results}>
+        <View style={styles.resultsBox}>
+          <Text style={styles.resultsBoxText}>Wins</Text>
+          <Text style={styles.resultsBoxCount}>{winsCount.wins}</Text>
+        </View>
+        <View style={styles.resultsBox}>
+          <Text style={styles.resultsBoxText}>Draws</Text>
+          <Text style={styles.resultsBoxCount}>{winsCount.draws}</Text>
+        </View>
+        <View style={styles.resultsBox}>
+          <Text style={styles.resultsBoxText}>Losses</Text>
+          <Text style={styles.resultsBoxCount}>{winsCount.losses}</Text>
+        </View>
       </View>
       <View style={styles.gameBoard}>
         <Board
@@ -132,17 +130,19 @@ export default function Game({}: GameProps): ReactElement {
           onPlay={handlePlay}
         />
         {gameResult && (
-        <View style={styles.modal}>
-          <Text style= {styles.modalText}>
-            {getWinner(gameResult.winner) === 'HUMAN' && 'You Won!'}
-            {getWinner(gameResult.winner) === 'BOT' && 'You Lost!'}
-            {getWinner(gameResult.winner) === 'DRAW' && 'It\'s a draw!'}
+          <View style={styles.modal}>
+            <Text style={styles.modalText}>
+              {getWinner(gameResult.winner) === "HUMAN" && "You Won!"}
+              {getWinner(gameResult.winner) === "BOT" && "You Lost!"}
+              {getWinner(gameResult.winner) === "DRAW" && "It's a draw!"}
             </Text>
-          <MyButton title={'Play Again!'} onPress={()=> newGame()}></MyButton>
-        </View>
+            <MyButton
+              title={"Play Again!"}
+              onPress={() => newGame()}
+            ></MyButton>
+          </View>
         )}
       </View>
     </View>
-
   );
 }

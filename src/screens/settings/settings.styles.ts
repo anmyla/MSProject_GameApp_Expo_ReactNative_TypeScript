@@ -11,7 +11,7 @@ field: {
 
 },
 label: {
-    color: '#fff',
+    color: '#f2f2f2',
     fontSize: 18,
     fontFamily: "DeliusUnicase-Bold",
 },
@@ -22,12 +22,14 @@ choices: {
     marginHorizontal: -5
 },
 choice: {
-    backgroundColor: '#fff',
+    backgroundColor: '#171716',
     padding: 10,
-    margin: 5
+    margin: 5,
+    borderWidth: 1,
+    borderColor: '#f2f2f2',
 },
 choiceText: {
-    color: '#000',
+    color: '#f2f2f2',
     fontFamily: "DeliusUnicase-Bold",
 }, 
 switch: {
