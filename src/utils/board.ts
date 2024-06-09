@@ -1,15 +1,15 @@
-import { BoardProps, BoardResult, Moves } from './types';
+import { BoardProps, BoardResult, BoardState, Moves } from './types';
 
 
-export function isBoardFull(squares: (string | null)[]) {
+export function isBoardFull(squares: BoardState) {
     return squares.every((square) => square);
   }
   
-  export function isBoardEmpty(squares: (string | null)[]) {
+  export function isBoardEmpty(squares: BoardState) {
     return squares.every((square) => square === null);
   }
 
-export const printFormattedBoard = (state: BoardProps["squares"]): void => {
+export const printFormattedBoard = (state: BoardState): void => {
     let formattedString = "";
   
     state.forEach((square, index) => {
@@ -36,7 +36,7 @@ export const getAvailableMoves = (squares: (string | null)[]) => {
     return moves;
   }  
 
-export const isTerminal = (state: BoardProps["squares"]): BoardResult | false => {
+export const isTerminal = (state: BoardState): BoardResult | false => {
     if(isBoardEmpty(state)) return false;
 
     const winningLines = [
@@ -78,6 +78,28 @@ export const isTerminal = (state: BoardProps["squares"]): BoardResult | false =>
     }
     return false;
 };
+
+export function calculateWinner(state: BoardState) {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (state[a] && state[a] === state[b] && state[a] === state[c]) {
+        return state[a];
+      }
+    }
+    return null;
+  }
+  
+  
 
 
 

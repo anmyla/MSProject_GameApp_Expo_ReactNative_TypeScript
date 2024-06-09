@@ -4,9 +4,9 @@ export type SquareProps = {
   }
 
 export type BoardProps = {
-    xIsNext: boolean;
-    squares: BoardState;
-    onPlay: (squares: (string | null)[]) => void;
+    disabled? : boolean;
+    state: BoardState;
+    onPlay: (square: number) => void;
 }
 
 export type Square = string | null;
