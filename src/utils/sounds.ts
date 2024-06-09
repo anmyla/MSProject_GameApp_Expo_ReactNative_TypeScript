@@ -11,7 +11,7 @@ export default function useSounds(): (sound: SoundType) => void {
     const popSoundRefLoss = useRef<Audio.Sound | null>(null);
     const popSoundRefDraw = useRef<Audio.Sound | null>(null);
    
-    const playSound = (sound : SoundType): void => {
+    const playSound = async (sound : SoundType): Promise<void> => {
         const soundMap = {
             player1 : popSoundRef,
             player2 : popSoundRef2,
@@ -20,7 +20,8 @@ export default function useSounds(): (sound: SoundType) => void {
             draw : popSoundRefDraw
         }
         try{
-            soundMap[sound].current?.replayAsync();
+            const status = await soundMap[sound].current?.getStatusAsync();
+            status && status.isLoaded && soundMap[sound].current?.replayAsync();
             switch (sound) {
                 case 'player1':
                     break;
