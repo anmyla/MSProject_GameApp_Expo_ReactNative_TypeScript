@@ -8,7 +8,7 @@ export default function Settings():ReactElement
  {
   return (
     <GradienBackground>
-    <ScrollView style= {styles.container}>
+    <ScrollView contentContainerStyle= {styles.container}>
      
     </ScrollView>
     </GradienBackground>

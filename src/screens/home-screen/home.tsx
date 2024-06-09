@@ -24,7 +24,10 @@ export default function Home({ navigation }: HomeProps): ReactElement {
           }} />
           <MyButton title="Multi PLayer" style={styles.button} />
           <MyButton title="Login" style={styles.button} />
-          <MyButton title="Settings" style={styles.button} />
+          <MyButton title="Settings" style={styles.button} 
+          onPress={() => {
+            navigation.navigate('Settings');
+          }}/>
         </View>
       </ScrollView>
     </GradienBackground>
