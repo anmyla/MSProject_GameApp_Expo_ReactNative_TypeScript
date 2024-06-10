@@ -129,20 +129,17 @@ export default function Game({}: GameProps): ReactElement {
           state={state}
           onPlay={handlePlay}
         />
-        {gameResult && (
-          <View style={styles.modal}>
-            <Text style={styles.modalText}>
-              {getWinner(gameResult.winner) === "HUMAN" && "You Won!"}
-              {getWinner(gameResult.winner) === "BOT" && "You Lost!"}
-              {getWinner(gameResult.winner) === "DRAW" && "It's a draw!"}
-            </Text>
-            <MyButton
-              title={"Play Again!"}
-              onPress={() => newGame()}
-            ></MyButton>
-          </View>
-        )}
       </View>
+      {gameResult && (
+        <View style={styles.modal}>
+          <Text style={styles.modalText}>
+            {getWinner(gameResult.winner) === "HUMAN" && "You Won!"}
+            {getWinner(gameResult.winner) === "BOT" && "You Lost!"}
+            {getWinner(gameResult.winner) === "DRAW" && "It's a draw!"}
+          </Text>
+          <MyButton style={styles.buttonModal1} title={"Play Again!"} onPress={() => newGame()}></MyButton>
+        </View>
+      )}
     </View>
   );
 }
