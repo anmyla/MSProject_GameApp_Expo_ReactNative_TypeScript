@@ -48,7 +48,7 @@ export default function Settings(): ReactElement | null {
     }
   };
 
-  const loadSettins = async () => {
+  const loadSettings = async () => {
     try {
       const settings = await AsyncStorage.getItem("@settings");
       settings !== null
@@ -60,7 +60,7 @@ export default function Settings(): ReactElement | null {
   };
 
   useEffect(() => {
-    loadSettins();
+    loadSettings();
   }, []);
 
   if (!settings) {
