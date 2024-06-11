@@ -6,63 +6,13 @@ import {
   Switch,
   Alert,
 } from "react-native";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement } from "react";
 import { GradienBackground } from "../../components";
 import styles from "./settings.styles";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-const difficulty = {
-  "1": "Beginner",
-  "3": "Intermediate",
-  "4": "Hard",
-  "-1": "Impossible",
-};
-
-type SettingsType = {
-  difficulty: keyof typeof difficulty;
-  haptics: boolean;
-  sounds: boolean;
-};
-
-const defaultSettings: SettingsType = {
-  difficulty: "1",
-  haptics: true,
-  sounds: true,
-};
+import { difficulty, useSettings } from "../../contexts/settings-context";
 
 export default function Settings(): ReactElement | null {
-  const [settings, setSettings] = useState<SettingsType | null>(null);
-
-  const saveSetting = async <T extends keyof SettingsType>(
-    setting: T,
-    value: SettingsType[T]
-  ) => {
-    try {
-      const oldSettings = settings ? settings : defaultSettings;
-      const newSettings = { ...oldSettings, [setting]: value };
-      const jsonSettings = JSON.stringify(newSettings);
-      await AsyncStorage.setItem("@setting", jsonSettings);
-      setSettings(newSettings);
-    } catch (error) {
-      Alert.alert("Error: An error has occured in saving your settings.");
-    }
-  };
-
-  const loadSettings = async () => {
-    try {
-      const settings = await AsyncStorage.getItem("@settings");
-      settings !== null
-        ? setSettings(JSON.parse(settings))
-        : setSettings(defaultSettings);
-    } catch (error) {
-      setSettings(defaultSettings);
-    }
-  };
-
-  useEffect(() => {
-    loadSettings();
-  }, []);
-
+    const{settings, saveSetting } = useSettings()
   if (!settings) {
     return null;
   }
