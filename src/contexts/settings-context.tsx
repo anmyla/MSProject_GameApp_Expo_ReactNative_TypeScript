@@ -10,10 +10,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
 
 const difficulty = {
-  "1": "Beginner",
-  "3": "Intermediate",
-  "4": "Hard",
-  "-1": "Impossible",
+  "1": "Breezy",
+  "3": "Tough",
+  "0": "Savage",
 };
 
 type SettingsType = {

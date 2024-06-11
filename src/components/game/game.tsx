@@ -5,6 +5,7 @@ import styles from "./game.styles";
 import { BoardState, Square, isBoardEmpty } from "../../utils";
 import { isTerminal, getBestMove, useSounds } from "../../utils";
 import MyButton from "../buttons/buttons";
+import { useSettings, difficulty } from "../../contexts/settings-context";
 
 type GameProps = {};
 
@@ -23,6 +24,7 @@ export default function Game({}: GameProps): ReactElement {
   });
 
   const playSound = useSounds();
+  const {settings} = useSettings();
 
   /*
   //for debugging purposes
@@ -94,7 +96,7 @@ export default function Game({}: GameProps): ReactElement {
         setIsHumanMaximizing(false);
         setTurn("HUMAN");
       } else {
-        const best = getBestMove(state, !isHumanMaximizing, 0, 1);
+        const best = getBestMove(state, !isHumanMaximizing, 0, parseInt(settings ? settings.difficulty : '1'));
         move(best, isHumanMaximizing ? "O" : "X");
         setTurn("HUMAN");
       }
@@ -107,7 +109,7 @@ export default function Game({}: GameProps): ReactElement {
         <Text style={styles.title}>TICTACTOE</Text>
       </View>
       <View style={styles.difficulty}>
-        <Text style={styles.difficultyText}>Difficulty: Hard</Text>
+        <Text style={styles.difficultyText}>Level: {settings ? difficulty[settings.difficulty] : 'Breezy'}</Text>
       </View>
       <View style={styles.results}>
         <View style={styles.resultsBox}>
