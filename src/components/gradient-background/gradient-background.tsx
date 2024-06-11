@@ -7,7 +7,6 @@ type GradienBackgroundProps = {
   children: ReactNode;
 };
 
-
 export default function GradienBackground({
   children,
 }: GradienBackgroundProps): ReactElement {
@@ -23,21 +22,3 @@ export default function GradienBackground({
     </View>
   );
 }
-
-
-/*
-export default function GradienBackground({
-  children,
-}: GradienBackgroundProps): ReactElement {
-  return (
-    <View style={{ flex: 1 }}>
-      <StatusBar style='light' />
-      <LinearGradient
-        style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0 }}
-        colors={['#171716', '#171716']}
-      />
-      {children}
-    </View>
-  );
-}
-*/
