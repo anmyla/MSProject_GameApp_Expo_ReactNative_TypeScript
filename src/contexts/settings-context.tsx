@@ -12,7 +12,7 @@ import { Alert } from "react-native";
 const difficulty = {
   "1": "Breezy",
   "3": "Tough",
-  "0": "Savage",
+  "-1": "Savage",
 };
 
 type SettingsType = {
