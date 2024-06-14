@@ -1,23 +1,29 @@
 import React, { ReactElement, useRef, useState } from "react";
-import { ScrollView, TextInput as NativeTextInput, Alert, Text } from "react-native";
+import {
+  ScrollView,
+  TextInput as NativeTextInput,
+  Alert,
+  Text,
+} from "react-native";
 import styles from "./signup.styles";
 import { GradienBackground, TextInput, MyButton } from "../../components";
 import { Auth } from "aws-amplify";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { StackNavigatorParams } from "../../config/navigator";
 
-
 type SignUpProps = {
   navigation: StackNavigationProp<StackNavigatorParams, "SignUp">;
 };
 
-
-export default function SignUp({navigation}: SignUpProps): ReactElement {
+export default function SignUp({ navigation }: SignUpProps): ReactElement {
   const passwordRef = useRef<NativeTextInput | null>(null);
+  const usernameRef = useRef<NativeTextInput | null>(null);
+  const emailRef = useRef<NativeTextInput | null>(null);
   const [form, setForm] = useState({
-    email: "",
     username: "",
     password: "",
+    email: "",
+    name: "",
   });
   const [loading, setLoading] = useState(false);
 
@@ -45,13 +51,22 @@ export default function SignUp({navigation}: SignUpProps): ReactElement {
 */
   const signUp = async () => {
     setLoading(true);
-    const { username, password } = form;
+    const { username, password, email, name } = form;
     try {
-      await Auth.signUp(username, password);
+      await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email,
+          name,
+        },
+      });
       navigation.navigate("Home");
     } catch (error) {
       console.log(error instanceof Error);
-      const errorMessage = (error as Error).message || "An unknown error while signing in has occurred";
+      const errorMessage =
+        (error as Error).message ||
+        "An unknown error while signing in has occurred";
       Alert.alert("An error has occured! ", errorMessage);
     }
     setLoading(false);
@@ -60,8 +75,21 @@ export default function SignUp({navigation}: SignUpProps): ReactElement {
   return (
     <GradienBackground>
       <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.heading}>Username:</Text>
+        <Text style={styles.heading}>Name:</Text>
         <TextInput
+          value={form.name}
+          onChangeText={(value) => {
+            setFormInput("name", value);
+          }}
+          returnKeyType="next"
+          placeholder="name"
+          onSubmitEditing={() => {
+            usernameRef.current?.focus();
+          }}
+        />
+        <Text style={styles.heading}>Username:</Text>
+        <TextInput
+          ref={usernameRef}
           value={form.username}
           onChangeText={(value) => {
             setFormInput("username", value);
@@ -69,28 +97,30 @@ export default function SignUp({navigation}: SignUpProps): ReactElement {
           returnKeyType="next"
           placeholder="Username"
           onSubmitEditing={() => {
-            passwordRef.current?.focus();
+            emailRef.current?.focus();
           }}
         />
-       <Text style={styles.heading}>Email:</Text>
+        <Text style={styles.heading}>Email:</Text>
         <TextInput
+          keyboardType="email-address"
+          ref={emailRef}
           value={form.email}
           onChangeText={(value) => {
-            setFormInput("username", value);
+            setFormInput("email", value);
           }}
           returnKeyType="next"
-          placeholder="Email"
+          placeholder="email"
           onSubmitEditing={() => {
             passwordRef.current?.focus();
           }}
         />
-      <Text style={styles.heading}>Password:</Text>  
+        <Text style={styles.heading}>Password:</Text>
         <TextInput
+          ref={passwordRef}
           value={form.password}
           onChangeText={(value) => {
             setFormInput("password", value);
           }}
-          ref={passwordRef}
           returnKeyType="done"
           secureTextEntry
           placeholder="Password"
@@ -105,5 +135,3 @@ export default function SignUp({navigation}: SignUpProps): ReactElement {
     </GradienBackground>
   );
 }
-
-
