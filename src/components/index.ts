@@ -4,3 +4,4 @@ export { default as MyButton } from './buttons/buttons'
 export { default as Board } from './game-board/board'
 export { default as Squares } from './squares/square'
 export { default as Game } from './game/game'
+export { default as TextInputField } from "./text-input/textInput"

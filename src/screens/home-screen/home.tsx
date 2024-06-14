@@ -6,7 +6,7 @@ import { StackNavigatorParams } from "../../config/navigator";
 import { GradienBackground, MyButton } from "../../components";
 
 type HomeProps = {
-  navigation: StackNavigationProp<StackNavigatorParams, 'Home'>;
+  navigation: StackNavigationProp<StackNavigatorParams, "Home">;
 };
 
 export default function Home({ navigation }: HomeProps): ReactElement {
@@ -18,16 +18,28 @@ export default function Home({ navigation }: HomeProps): ReactElement {
           source={require("../../../assets/images/logo.png")}
         />
         <View>
-          <MyButton title="Single PLayer" style={styles.button}
-          onPress={() => {
-            navigation.navigate('SinglePlayerGame');
-          }} />
+          <MyButton
+            title="Single PLayer"
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate("SinglePlayerGame");
+            }}
+          />
           <MyButton title="Multi PLayer" style={styles.button} />
-          <MyButton title="Login" style={styles.button} />
-          <MyButton title="Settings" style={styles.button} 
-          onPress={() => {
-            navigation.navigate('Settings');
-          }}/>
+          <MyButton
+            title="Login"
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate("Login");
+            }}
+          />
+          <MyButton
+            title="Settings"
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate("Settings");
+            }}
+          />
         </View>
       </ScrollView>
     </GradienBackground>
