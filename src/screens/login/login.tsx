@@ -1,23 +1,16 @@
 import React, { ReactElement } from "react";
-import { View, ScrollView, Image, Text, TextInput } from "react-native";
+import { ScrollView } from "react-native";
 import styles from "./login.styles";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { StackNavigatorParams } from "../../config/navigator";
-import { GradienBackground, MyButton } from "../../components";
+import { GradienBackground, TextInput} from "../../components";
 
-type LoginProps = {
-  navigation: StackNavigationProp<StackNavigatorParams, "Login">;
-};
-
-export default function Login({ navigation }: LoginProps): ReactElement {
+export default function Login(): ReactElement {
   return (
     <GradienBackground>
       <ScrollView contentContainerStyle={styles.container}>
-        <TextInput />
+        <TextInput placeholder="Username"/>
+        <TextInput  placeholder="Password"/>
       </ScrollView>
-      <View>
-        <Text>Login</Text>
-      </View>
     </GradienBackground>
+
   );
 }

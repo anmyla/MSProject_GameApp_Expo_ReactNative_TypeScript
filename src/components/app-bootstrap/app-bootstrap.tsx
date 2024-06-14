@@ -18,6 +18,7 @@ export default function AppBootstrap({
 }: AppBootstrapProps): ReactElement {
   const [fontsLoaded] = useFonts({
     "DeliusUnicase-Bold": require("../../../assets/fonts/DeliusUnicase-Bold.ttf"),
+    "DeliusUnicase-Regular": require("../../../assets/fonts/DeliusUnicase-Regular.ttf"),
   });
 
   const [appIsReady, setAppIsReady] = useState(false);

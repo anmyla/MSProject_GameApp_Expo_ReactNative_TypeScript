@@ -4,7 +4,6 @@ import {
   ScrollView,
   TouchableOpacity,
   Switch,
-  Alert,
 } from "react-native";
 import React, { ReactElement } from "react";
 import { GradienBackground } from "../../components";
@@ -12,7 +11,7 @@ import styles from "./settings.styles";
 import { difficulty, useSettings } from "../../contexts/settings-context";
 
 export default function Settings(): ReactElement | null {
-    const{settings, saveSetting } = useSettings()
+  const { settings, saveSetting } = useSettings();
   if (!settings) {
     return null;
   }
