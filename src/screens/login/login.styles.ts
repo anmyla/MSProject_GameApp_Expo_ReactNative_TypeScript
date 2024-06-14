@@ -9,6 +9,13 @@ loginButton: {
     alignSelf: 'center',
     width: 200,
     marginTop: 50
+},
+heading: {
+    fontFamily: "DeliusUnicase-Bold",
+    textAlign: 'left',
+    fontSize: 20,
+    color: '#f2f2f2',
+    marginTop: 40
 }
 
 });

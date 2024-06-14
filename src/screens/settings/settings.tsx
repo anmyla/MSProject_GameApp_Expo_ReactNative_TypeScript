@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  Switch,
-} from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Switch } from "react-native";
 import React, { ReactElement } from "react";
 import { GradienBackground } from "../../components";
 import styles from "./settings.styles";
@@ -20,7 +14,9 @@ export default function Settings(): ReactElement | null {
     <GradienBackground>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.field}>
-          <Text style={styles.label}>DIFFICULTY LEVEL</Text>
+          <Text style={styles.label}>
+            SINGLE PLAYER MODE: DIFFICULTY LEVELS
+          </Text>
           <View style={styles.choices}>
             {Object.keys(difficulty).map((level) => {
               return (

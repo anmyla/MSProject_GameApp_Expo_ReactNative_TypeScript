@@ -1,5 +1,5 @@
 import React, { ReactElement, useRef, useState } from "react";
-import { ScrollView, TextInput as NativeTextInput, Alert } from "react-native";
+import { ScrollView, TextInput as NativeTextInput, Alert, Text } from "react-native";
 import styles from "./login.styles";
 import { GradienBackground, TextInput, MyButton } from "../../components";
 import { Auth } from "aws-amplify";
@@ -49,8 +49,9 @@ export default function Login({navigation}: LoginProps): ReactElement {
       await Auth.signIn(username, password);
       navigation.navigate("Home");
     } catch (error) {
-      console.log(error);
-      Alert.alert("An error has occured! ", error.message);
+      console.log(error instanceof Error);
+      const errorMessage = (error as Error).message || "An unknown error while signing in has occurred";
+      Alert.alert("An error has occured! ", errorMessage);
     }
     setLoading(false);
   };
@@ -58,6 +59,7 @@ export default function Login({navigation}: LoginProps): ReactElement {
   return (
     <GradienBackground>
       <ScrollView contentContainerStyle={styles.container}>
+       <Text style={styles.heading}>Username:</Text>
         <TextInput
           value={form.username}
           onChangeText={(value) => {
@@ -69,6 +71,7 @@ export default function Login({navigation}: LoginProps): ReactElement {
             passwordRef.current?.focus();
           }}
         />
+      <Text style={styles.heading}>Password:</Text>  
         <TextInput
           value={form.password}
           onChangeText={(value) => {

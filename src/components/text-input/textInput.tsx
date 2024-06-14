@@ -10,7 +10,7 @@ const TextInput = forwardRef<NativeTextInput, NativeTextInputProps>(
     return (
       <NativeTextInput
         ref={ref}
-        placeholderTextColor={"#171716"}
+        placeholderTextColor={"#B8B6C1"}
         style={[styles.textField, style]}
         {...props}
       />

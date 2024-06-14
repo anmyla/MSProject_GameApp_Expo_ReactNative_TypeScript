@@ -8,10 +8,8 @@ textField:{
     borderColor: '#000000',
     backgroundColor: '#f2f2f2',
     padding: 10,
-    color: '#171716',
-    fontFamily: "DeliusUnicase-Regular",
-    marginTop: 50,
-    fontSize: 20
+    color: '#000000',
+    fontSize: 24,
 }
 
 });
