@@ -4,25 +4,19 @@ import React, {
   useCallback,
   useEffect,
   useState,
-  createContext,
-  Dispatch,
-  SetStateAction,
 } from "react";
 import { View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { Auth } from "aws-amplify";
+import { Auth, Hub } from "aws-amplify";
+import { useAuth } from "../../contexts/auth-context";
+
 
 type AppBootstrapProps = {
   children: ReactNode;
 };
 
-type AuthContextType = {
-  user: { [key: string]: any } | null;
-  setUser: Dispatch<SetStateAction<{ [key: string]: any } | null>>;
-};
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export default function AppBootstrap({
   children,
@@ -32,9 +26,9 @@ export default function AppBootstrap({
     "DeliusUnicase-Regular": require("../../../assets/fonts/DeliusUnicase-Regular.ttf"),
   });
 
-  const [user, setUser] = useState<{ [key: string]: any } | null>(null);
-
   const [authLoaded, setAuthLoaded] = useState(false);
+  const {setUser} = useAuth();
+
   useEffect(() => {
     async function checkCurrentUser() {
       try {
@@ -47,6 +41,22 @@ export default function AppBootstrap({
       setAuthLoaded(true);
     }
     checkCurrentUser();
+
+    function hubListener(hubData: any) { 
+      const{data,event} = hubData.payload;
+      switch(event) {
+        case "signOut": setUser(null);
+        break;
+        case "signIn": setUser(data);
+        break;
+      default:
+      break;
+    }
+
+    }
+
+      Hub.listen("auth", hubListener);
+      return () => Hub.remove("auth", hubListener); 
   }, []);
 
   const [appIsReady, setAppIsReady] = useState(false);
@@ -75,10 +85,8 @@ export default function AppBootstrap({
   }
 
   return (
-    <AuthContext.Provider value ={{user, setUser}} >
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
       {appIsReady && authLoaded && children}
     </View>
-    </AuthContext.Provider>
   );
 }
