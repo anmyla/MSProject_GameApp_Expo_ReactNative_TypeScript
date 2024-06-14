@@ -12,23 +12,11 @@ const TextInput = forwardRef<NativeTextInput, NativeTextInputProps>(
         ref={ref}
         placeholderTextColor={"#171716"}
         style={[styles.textField, style]}
-      ></NativeTextInput>
+        {...props}
+      />
     );
   }
 );
 
 TextInput.displayName = "TextInput";
-
 export default TextInput;
-
-/*
-export default function TextInput(props: NativeInputProps): ReactElement {
-  return (
-    <NativeTextInput
-      style={styles.textField}
-      placeholderTextColor={'#171716'}
-      {...props}>
-    </NativeTextInput>
-  );
-}
-*/

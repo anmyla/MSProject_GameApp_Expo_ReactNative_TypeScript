@@ -1,52 +1,93 @@
 import React, { ReactElement, useRef, useState } from "react";
-import { ScrollView, TextInput as NativeTextInput } from "react-native";
+import { ScrollView, TextInput as NativeTextInput, Alert } from "react-native";
 import styles from "./login.styles";
-import { GradienBackground, TextInput, MyButton} from "../../components";
+import { GradienBackground, TextInput, MyButton } from "../../components";
+import { Auth } from "aws-amplify";
 
 export default function Login(): ReactElement {
-    const passwordRef = useRef<NativeTextInput | null>(null);
-    const [form, setForm] = useState({
-        username: '',
-        password: ''
-    })
-    const [loading, setLoading] = useState(false);
+  const passwordRef = useRef<NativeTextInput | null>(null);
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+  });
+  const [loading, setLoading] = useState(false);
 
-    const setFormInput = (key : keyof typeof form, value: string) => {
-        setForm({...form, [key]: value})
+  const setFormInput = (key: keyof typeof form, value: string) => {
+    setForm({ ...form, [key]: value });
+  };
+
+  /*
+  const signup = async () => {
+    try {
+      const resSignUp = await Auth.signUp({
+        username: "test",
+        password: "testtest",
+        attributes: {
+          email: "test@test.com",
+          name: "test",
+        },
+      });
+      console.log(resSignUp);
+    } catch (error) {
+      console.log(error);
+      Alert.alert("An error has occured! ", error.message);
     }
-
-    const login = () => {
-        setLoading(true);
-        const {username, password} = form;
-        console.log(username, password)
-        
-        setLoading(false);
+  };
+*/
+  const login = async () => {
+    setLoading(true);
+    const { username, password } = form;
+    console.log(username, password);
+    try {
+      const authResponse = await Auth.signIn(username, password);
+      console.log(authResponse);
+    } catch (error) {
+      console.log(error);
+      Alert.alert("An error has occured! ", error.message);
     }
+    setLoading(false);
+  };
 
-    return (
+  return (
     <GradienBackground>
       <ScrollView contentContainerStyle={styles.container}>
         <TextInput
-        value={form.username} 
-        onChangeText={(value) => {
-            setFormInput('username', value)}}
-        returnKeyType="next" 
-        placeholder="Username"
-        onSubmitEditing={()=>{ passwordRef.current?.focus()
-
-        }}/>
-        <TextInput 
-        value={form.password}
-        onChangeText={(value) => {
-            setFormInput('password', value)}}
-        ref={passwordRef}
-        returnKeyType="done" 
-        secureTextEntry 
-        placeholder="Password"/>
-        <MyButton title={"Log In"} onPress={login}/>
-            
+          value={form.username}
+          onChangeText={(value) => {
+            setFormInput("username", value);
+          }}
+          returnKeyType="next"
+          placeholder="Username"
+          onSubmitEditing={() => {
+            passwordRef.current?.focus();
+          }}
+        />
+        <TextInput
+          value={form.password}
+          onChangeText={(value) => {
+            setFormInput("password", value);
+          }}
+          ref={passwordRef}
+          returnKeyType="done"
+          secureTextEntry
+          placeholder="Password"
+        />
+        <MyButton
+          loading={loading}
+          style={styles.loginButton}
+          title={"Log In"}
+          onPress={login}
+        />
       </ScrollView>
     </GradienBackground>
-
   );
 }
+
+/*
+<MyButton
+loading={loading}
+style={styles.loginButton}
+title={"Sign Up"}
+onPress={signup}
+/>
+*/

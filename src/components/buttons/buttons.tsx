@@ -1,15 +1,34 @@
-import { View, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
-import React, { ReactElement } from 'react'
-import styles from './button.styles'
+import {
+  ActivityIndicator,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from "react-native";
+import React, { ReactElement } from "react";
+import styles from "./button.styles";
 
 type MyButtonProps = {
-    title: string;
-} & TouchableOpacityProps
+  title: string;
+  loading: boolean;
+} & TouchableOpacityProps;
 
-export default function MyButton({title, style, ...props}: MyButtonProps): ReactElement {
+export default function MyButton({
+  title,
+  style,
+  loading,
+  ...props
+}: MyButtonProps): ReactElement {
   return (
-        <TouchableOpacity {...props} style ={[styles.button, style]}>
-            <Text style={styles.buttonText}>{title}</Text>
-          </TouchableOpacity>
-  )
+    <TouchableOpacity
+      disabled={loading}
+      {...props}
+      style={[styles.button, style]}
+    >
+      {loading ? (
+        <ActivityIndicator color="#000" />
+      ) : (
+        <Text style={styles.buttonText}>{title}</Text>
+      )}
+    </TouchableOpacity>
+  );
 }
