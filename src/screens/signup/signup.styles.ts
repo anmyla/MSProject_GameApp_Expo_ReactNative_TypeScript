@@ -16,19 +16,6 @@ heading: {
     fontSize: 20,
     color: '#f2f2f2',
     marginTop: 40
-},
-signUpLinkDiv: {
-    marginTop: 50,
-    alignContent: 'center',
-    paddingHorizontal: 20
-},
-signUpLink: {
-    color: '#f2f2f2',
-    fontFamily: "DeliusUnicase-Bold",
-    textAlign: 'center',
-    fontSize: 16,
-    textDecorationLine: "underline",
-
 }
 
 });

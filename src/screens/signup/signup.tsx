@@ -1,24 +1,21 @@
 import React, { ReactElement, useRef, useState } from "react";
-import {
-  ScrollView,
-  TextInput as NativeTextInput,
-  Alert,
-  Text,
-  TouchableOpacity,
-} from "react-native";
-import styles from "./login.styles";
+import { ScrollView, TextInput as NativeTextInput, Alert, Text } from "react-native";
+import styles from "./signup.styles";
 import { GradienBackground, TextInput, MyButton } from "../../components";
 import { Auth } from "aws-amplify";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { StackNavigatorParams } from "../../config/navigator";
 
-type LoginProps = {
-  navigation: StackNavigationProp<StackNavigatorParams, "Home">;
+
+type SignUpProps = {
+  navigation: StackNavigationProp<StackNavigatorParams, "SignUp">;
 };
 
-export default function Login({ navigation }: LoginProps): ReactElement {
+
+export default function SignUp({navigation}: SignUpProps): ReactElement {
   const passwordRef = useRef<NativeTextInput | null>(null);
   const [form, setForm] = useState({
+    email: "",
     username: "",
     password: "",
   });
@@ -46,17 +43,15 @@ export default function Login({ navigation }: LoginProps): ReactElement {
     }
   };
 */
-  const login = async () => {
+  const signUp = async () => {
     setLoading(true);
     const { username, password } = form;
     try {
-      await Auth.signIn(username, password);
+      await Auth.signUp(username, password);
       navigation.navigate("Home");
     } catch (error) {
       console.log(error instanceof Error);
-      const errorMessage =
-        (error as Error).message ||
-        "An unknown error while signing in has occurred";
+      const errorMessage = (error as Error).message || "An unknown error while signing in has occurred";
       Alert.alert("An error has occured! ", errorMessage);
     }
     setLoading(false);
@@ -65,7 +60,7 @@ export default function Login({ navigation }: LoginProps): ReactElement {
   return (
     <GradienBackground>
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.heading}>Username:</Text>
+      <Text style={styles.heading}>Username:</Text>
         <TextInput
           value={form.username}
           onChangeText={(value) => {
@@ -77,7 +72,19 @@ export default function Login({ navigation }: LoginProps): ReactElement {
             passwordRef.current?.focus();
           }}
         />
-        <Text style={styles.heading}>Password:</Text>
+       <Text style={styles.heading}>Email:</Text>
+        <TextInput
+          value={form.email}
+          onChangeText={(value) => {
+            setFormInput("username", value);
+          }}
+          returnKeyType="next"
+          placeholder="Email"
+          onSubmitEditing={() => {
+            passwordRef.current?.focus();
+          }}
+        />
+      <Text style={styles.heading}>Password:</Text>  
         <TextInput
           value={form.password}
           onChangeText={(value) => {
@@ -91,19 +98,12 @@ export default function Login({ navigation }: LoginProps): ReactElement {
         <MyButton
           loading={loading}
           style={styles.loginButton}
-          title={"Log In"}
-          onPress={login}
+          title={"Register"}
+          onPress={signUp}
         />
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("SignUp");
-          }}
-          style={styles.signUpLinkDiv}
-        >
-          <Text style={styles.signUpLink}>New Here? Sign Up now! </Text>
-        </TouchableOpacity>
       </ScrollView>
     </GradienBackground>
   );
 }
+
 
