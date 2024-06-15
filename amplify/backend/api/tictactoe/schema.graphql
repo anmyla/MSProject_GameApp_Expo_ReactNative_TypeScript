@@ -1,5 +1,10 @@
-type Todo @model {
+type Player 
+  @model 
+  @key(fields: ["username"]) 
+  @auth(rules: [{ allow: owner }]) {
   id: ID!
+  username: String!
+  cognitoID: String!
   name: String!
-  description: String
+  email: AWSEmail!
 }

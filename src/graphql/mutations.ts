@@ -8,54 +8,60 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
-export const createTodo = /* GraphQL */ `mutation CreateTodo(
-  $input: CreateTodoInput!
-  $condition: ModelTodoConditionInput
+export const createPlayer = /* GraphQL */ `mutation CreatePlayer(
+  $input: CreatePlayerInput!
+  $condition: ModelPlayerConditionInput
 ) {
-  createTodo(input: $input, condition: $condition) {
+  createPlayer(input: $input, condition: $condition) {
     id
+    cognitoID
+    username
     name
-    description
+    email
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateTodoMutationVariables,
-  APITypes.CreateTodoMutation
+  APITypes.CreatePlayerMutationVariables,
+  APITypes.CreatePlayerMutation
 >;
-export const updateTodo = /* GraphQL */ `mutation UpdateTodo(
-  $input: UpdateTodoInput!
-  $condition: ModelTodoConditionInput
+export const updatePlayer = /* GraphQL */ `mutation UpdatePlayer(
+  $input: UpdatePlayerInput!
+  $condition: ModelPlayerConditionInput
 ) {
-  updateTodo(input: $input, condition: $condition) {
+  updatePlayer(input: $input, condition: $condition) {
     id
+    cognitoID
+    username
     name
-    description
+    email
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateTodoMutationVariables,
-  APITypes.UpdateTodoMutation
+  APITypes.UpdatePlayerMutationVariables,
+  APITypes.UpdatePlayerMutation
 >;
-export const deleteTodo = /* GraphQL */ `mutation DeleteTodo(
-  $input: DeleteTodoInput!
-  $condition: ModelTodoConditionInput
+export const deletePlayer = /* GraphQL */ `mutation DeletePlayer(
+  $input: DeletePlayerInput!
+  $condition: ModelPlayerConditionInput
 ) {
-  deleteTodo(input: $input, condition: $condition) {
+  deletePlayer(input: $input, condition: $condition) {
     id
+    cognitoID
+    username
     name
-    description
+    email
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteTodoMutationVariables,
-  APITypes.DeleteTodoMutation
+  APITypes.DeletePlayerMutationVariables,
+  APITypes.DeletePlayerMutation
 >;

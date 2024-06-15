@@ -8,27 +8,31 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getTodo = /* GraphQL */ `query GetTodo($id: ID!) {
-  getTodo(id: $id) {
+export const getPlayer = /* GraphQL */ `query GetPlayer($id: ID!) {
+  getPlayer(id: $id) {
     id
+    cognitoID
+    username
     name
-    description
+    email
     createdAt
     updatedAt
     __typename
   }
 }
-` as GeneratedQuery<APITypes.GetTodoQueryVariables, APITypes.GetTodoQuery>;
-export const listTodos = /* GraphQL */ `query ListTodos(
-  $filter: ModelTodoFilterInput
+` as GeneratedQuery<APITypes.GetPlayerQueryVariables, APITypes.GetPlayerQuery>;
+export const listPlayers = /* GraphQL */ `query ListPlayers(
+  $filter: ModelPlayerFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listPlayers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      cognitoID
+      username
       name
-      description
+      email
       createdAt
       updatedAt
       __typename
@@ -37,4 +41,7 @@ export const listTodos = /* GraphQL */ `query ListTodos(
     __typename
   }
 }
-` as GeneratedQuery<APITypes.ListTodosQueryVariables, APITypes.ListTodosQuery>;
+` as GeneratedQuery<
+  APITypes.ListPlayersQueryVariables,
+  APITypes.ListPlayersQuery
+>;

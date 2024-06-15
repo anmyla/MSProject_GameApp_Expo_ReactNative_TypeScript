@@ -10,6 +10,7 @@
       "keyDescription": "testTTT"
     },
     "conflictResolution": {},
-    "additionalAuthTypes": []
+    "additionalAuthTypes": [],
+    "suppressschemamigrationprompt": true
   }
 }
