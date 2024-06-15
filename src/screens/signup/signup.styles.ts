@@ -16,6 +16,26 @@ heading: {
     fontSize: 20,
     color: '#f2f2f2',
     marginTop: 20
+},
+pinInput: {
+    color: '#fffff',
+    fontFamily: "DeliusUnicase-Bold",
+    fontSize: 20,
+    borderWidth: 0,
+    borderRadius: 0,
+    backgroundColor: '#6C6B6D',
+    borderBottomWidth: 3,
+    borderBlockColor: '#ffffff'
+}, 
+pinInputText: {
+    backgroundColor: '#ffffff'
+},
+resendCode: {
+    color: '#f2f2f2',
+    fontFamily: "DeliusUnicase-Bold",
+    textAlign: 'center',
+    fontSize: 16,
+    textDecorationLine: "underline",
 }
 
 });
