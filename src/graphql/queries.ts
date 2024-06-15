@@ -8,11 +8,11 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getPlayer = /* GraphQL */ `query GetPlayer($id: ID!) {
-  getPlayer(id: $id) {
+export const getPlayer = /* GraphQL */ `query GetPlayer($username: String!) {
+  getPlayer(username: $username) {
     id
-    cognitoID
     username
+    cognitoID
     name
     email
     createdAt
@@ -22,15 +22,23 @@ export const getPlayer = /* GraphQL */ `query GetPlayer($id: ID!) {
 }
 ` as GeneratedQuery<APITypes.GetPlayerQueryVariables, APITypes.GetPlayerQuery>;
 export const listPlayers = /* GraphQL */ `query ListPlayers(
+  $username: String
   $filter: ModelPlayerFilterInput
   $limit: Int
   $nextToken: String
+  $sortDirection: ModelSortDirection
 ) {
-  listPlayers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listPlayers(
+    username: $username
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
     items {
       id
-      cognitoID
       username
+      cognitoID
       name
       email
       createdAt

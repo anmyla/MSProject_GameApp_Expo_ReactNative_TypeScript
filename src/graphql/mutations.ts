@@ -14,8 +14,8 @@ export const createPlayer = /* GraphQL */ `mutation CreatePlayer(
 ) {
   createPlayer(input: $input, condition: $condition) {
     id
-    cognitoID
     username
+    cognitoID
     name
     email
     createdAt
@@ -33,8 +33,8 @@ export const updatePlayer = /* GraphQL */ `mutation UpdatePlayer(
 ) {
   updatePlayer(input: $input, condition: $condition) {
     id
-    cognitoID
     username
+    cognitoID
     name
     email
     createdAt
@@ -52,8 +52,8 @@ export const deletePlayer = /* GraphQL */ `mutation DeletePlayer(
 ) {
   deletePlayer(input: $input, condition: $condition) {
     id
-    cognitoID
     username
+    cognitoID
     name
     email
     createdAt

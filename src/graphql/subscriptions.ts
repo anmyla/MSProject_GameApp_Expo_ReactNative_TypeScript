@@ -8,11 +8,11 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreatePlayer = /* GraphQL */ `subscription OnCreatePlayer($filter: ModelSubscriptionPlayerFilterInput) {
-  onCreatePlayer(filter: $filter) {
+export const onCreatePlayer = /* GraphQL */ `subscription OnCreatePlayer {
+  onCreatePlayer {
     id
-    cognitoID
     username
+    cognitoID
     name
     email
     createdAt
@@ -24,11 +24,11 @@ export const onCreatePlayer = /* GraphQL */ `subscription OnCreatePlayer($filter
   APITypes.OnCreatePlayerSubscriptionVariables,
   APITypes.OnCreatePlayerSubscription
 >;
-export const onUpdatePlayer = /* GraphQL */ `subscription OnUpdatePlayer($filter: ModelSubscriptionPlayerFilterInput) {
-  onUpdatePlayer(filter: $filter) {
+export const onUpdatePlayer = /* GraphQL */ `subscription OnUpdatePlayer {
+  onUpdatePlayer {
     id
-    cognitoID
     username
+    cognitoID
     name
     email
     createdAt
@@ -40,11 +40,11 @@ export const onUpdatePlayer = /* GraphQL */ `subscription OnUpdatePlayer($filter
   APITypes.OnUpdatePlayerSubscriptionVariables,
   APITypes.OnUpdatePlayerSubscription
 >;
-export const onDeletePlayer = /* GraphQL */ `subscription OnDeletePlayer($filter: ModelSubscriptionPlayerFilterInput) {
-  onDeletePlayer(filter: $filter) {
+export const onDeletePlayer = /* GraphQL */ `subscription OnDeletePlayer {
+  onDeletePlayer {
     id
-    cognitoID
     username
+    cognitoID
     name
     email
     createdAt
