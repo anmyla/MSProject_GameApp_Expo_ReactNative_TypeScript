@@ -4,6 +4,7 @@ import {
   TextInput as NativeTextInput,
   Alert,
   Text,
+  KeyboardAvoidingView,
 } from "react-native";
 import styles from "./signup.styles";
 import { GradienBackground, TextInput, MyButton } from "../../components";
@@ -74,64 +75,66 @@ export default function SignUp({ navigation }: SignUpProps): ReactElement {
 
   return (
     <GradienBackground>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.heading}>Name:</Text>
-        <TextInput
-          value={form.name}
-          onChangeText={(value) => {
-            setFormInput("name", value);
-          }}
-          returnKeyType="next"
-          placeholder="name"
-          onSubmitEditing={() => {
-            usernameRef.current?.focus();
-          }}
-        />
-        <Text style={styles.heading}>Username:</Text>
-        <TextInput
-          ref={usernameRef}
-          value={form.username}
-          onChangeText={(value) => {
-            setFormInput("username", value);
-          }}
-          returnKeyType="next"
-          placeholder="Username"
-          onSubmitEditing={() => {
-            emailRef.current?.focus();
-          }}
-        />
-        <Text style={styles.heading}>Email:</Text>
-        <TextInput
-          keyboardType="email-address"
-          ref={emailRef}
-          value={form.email}
-          onChangeText={(value) => {
-            setFormInput("email", value);
-          }}
-          returnKeyType="next"
-          placeholder="email"
-          onSubmitEditing={() => {
-            passwordRef.current?.focus();
-          }}
-        />
-        <Text style={styles.heading}>Password:</Text>
-        <TextInput
-          ref={passwordRef}
-          value={form.password}
-          onChangeText={(value) => {
-            setFormInput("password", value);
-          }}
-          returnKeyType="done"
-          secureTextEntry
-          placeholder="Password"
-        />
-        <MyButton
-          loading={loading}
-          style={styles.loginButton}
-          title={"Register"}
-          onPress={signUp}
-        />
-      </ScrollView>
+      <KeyboardAvoidingView behavior="padding" style={{ flex: 1}}>
+        <ScrollView contentContainerStyle={styles.container}>
+          <Text style={styles.heading}>Name:</Text>
+          <TextInput
+            value={form.name}
+            onChangeText={(value) => {
+              setFormInput("name", value);
+            }}
+            returnKeyType="next"
+            placeholder="name"
+            onSubmitEditing={() => {
+              usernameRef.current?.focus();
+            }}
+          />
+          <Text style={styles.heading}>Username:</Text>
+          <TextInput
+            ref={usernameRef}
+            value={form.username}
+            onChangeText={(value) => {
+              setFormInput("username", value);
+            }}
+            returnKeyType="next"
+            placeholder="Username"
+            onSubmitEditing={() => {
+              emailRef.current?.focus();
+            }}
+          />
+          <Text style={styles.heading}>Email:</Text>
+          <TextInput
+            keyboardType="email-address"
+            ref={emailRef}
+            value={form.email}
+            onChangeText={(value) => {
+              setFormInput("email", value);
+            }}
+            returnKeyType="next"
+            placeholder="email"
+            onSubmitEditing={() => {
+              passwordRef.current?.focus();
+            }}
+          />
+          <Text style={styles.heading}>Password:</Text>
+          <TextInput
+            ref={passwordRef}
+            value={form.password}
+            onChangeText={(value) => {
+              setFormInput("password", value);
+            }}
+            returnKeyType="done"
+            secureTextEntry
+            placeholder="Password"
+          />
+          <MyButton
+            loading={loading}
+            style={styles.loginButton}
+            title={"Register"}
+            onPress={signUp}
+          />
+        </ScrollView>
+      </KeyboardAvoidingView>
     </GradienBackground>
   );
 }
