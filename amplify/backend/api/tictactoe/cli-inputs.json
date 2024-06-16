@@ -10,7 +10,15 @@
       "keyDescription": "testTTT"
     },
     "conflictResolution": {},
-    "additionalAuthTypes": [],
+    "additionalAuthTypes": [
+      {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authtictactoea174f7b3"
+      },
+      {
+        "mode": "AWS_IAM"
+      }
+    ],
     "suppressschemamigrationprompt": true
   }
 }
