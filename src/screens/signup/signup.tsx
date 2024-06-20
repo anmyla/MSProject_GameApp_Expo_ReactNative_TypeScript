@@ -9,6 +9,7 @@ import {
   Touchable,
   TouchableOpacity,
 } from "react-native";
+
 import styles from "./signup.styles";
 import { GradienBackground, TextInput, MyButton } from "../../components";
 import { Auth } from "aws-amplify";
