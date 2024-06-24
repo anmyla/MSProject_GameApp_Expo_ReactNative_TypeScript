@@ -1,14 +1,59 @@
 type Player
   @model
   @key(fields: ["username"])
-  @auth(rules: [
-  { allow: private, operations: [read]}
-  { allow: owner, ownerField: "username", operations:[update]}
-  { allow: private, provider: iam, operations: [read, create, update, delete]}
-  ]) {
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: owner, ownerField: "username", operations: [update] }
+      {
+        allow: private
+        provider: iam
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
   id: ID!
   username: String!
   cognitoID: String!
   name: String!
   email: AWSEmail!
+  games: [PlayerGame] @connection(keyName: "byPlayer", fields: ["username"])
+}
+
+type Game @model {
+  id: ID!
+  status: GameStatus!
+  owners: [String!]!
+  initiator: String!
+  turn: String!
+  state: [Symbol]!
+  winner: String
+  players: [PlayerGame] @connection(keyName: "byGame", fields: ["id"])
+}
+
+type PlayerGame 
+@model(queries: null) 
+@key(name: "byGame", fields: ["gameID"]) 
+@key(name: "byPlayer", fields: ["playerUsername", "createdAt"])
+{
+  id: ID!
+  createdAt: String!
+  gameID: ID!
+  playerUsername: String!
+  owners: [String!]!
+  game: Game! @connection(fields:["gameID"])
+  player: Player! @connection(fields: ["playerUsername"])
+}
+
+enum GameStatus {
+  REQUESTED
+  DECLINED
+  ACTIVE
+  FINISHED
+  CANCELLED
+}
+
+enum Symbol {
+  x
+  o
 }

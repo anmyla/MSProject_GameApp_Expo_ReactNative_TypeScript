@@ -8,6 +8,48 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
+export const getGame = /* GraphQL */ `query GetGame($id: ID!) {
+  getGame(id: $id) {
+    id
+    status
+    owners
+    initiator
+    turn
+    state
+    winner
+    players {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.GetGameQueryVariables, APITypes.GetGameQuery>;
+export const listGames = /* GraphQL */ `query ListGames(
+  $filter: ModelGameFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listGames(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      status
+      owners
+      initiator
+      turn
+      state
+      winner
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.ListGamesQueryVariables, APITypes.ListGamesQuery>;
 export const getPlayer = /* GraphQL */ `query GetPlayer($username: String!) {
   getPlayer(username: $username) {
     id
@@ -15,6 +57,10 @@ export const getPlayer = /* GraphQL */ `query GetPlayer($username: String!) {
     cognitoID
     name
     email
+    games {
+      nextToken
+      __typename
+    }
     createdAt
     updatedAt
     __typename
