@@ -31,17 +31,16 @@ type Game @model {
   players: [PlayerGame] @connection(keyName: "byGame", fields: ["id"])
 }
 
-type PlayerGame 
-@model(queries: null) 
-@key(name: "byGame", fields: ["gameID"]) 
-@key(name: "byPlayer", fields: ["playerUsername", "createdAt"])
-{
+type PlayerGame
+  @model(queries: null)
+  @key(name: "byGame", fields: ["gameID"])
+  @key(name: "byPlayer", fields: ["playerUsername", "createdAt"]) {
   id: ID!
   createdAt: String!
   gameID: ID!
   playerUsername: String!
   owners: [String!]!
-  game: Game! @connection(fields:["gameID"])
+  game: Game! @connection(fields: ["gameID"])
   player: Player! @connection(fields: ["playerUsername"])
 }
 
