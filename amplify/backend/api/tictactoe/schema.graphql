@@ -2,6 +2,28 @@ type Mutation {
   startGame(invitee: String!): GameData
     @function(name: "startGame-${env}")
     @aws_cognito_user_pools
+
+  playMove(game: ID!, index: Int!): GameData
+    @function(name: "playMove-${env}")
+    @aws_cognito_user_pools
+
+  addExpoToken(token: String!): ExpoToken
+    @function(name: "addExpoToken-${env}")
+    @aws_cognito_user_pools
+}
+
+type Subscription {
+  onUpdateGameById(id: ID!): Game
+    @aws_subscribe(mutations: ["updateGame"])
+    @aws_cognito_user_pools
+}
+
+type GameData {
+  id: ID!
+  status: GameStatus!
+  turn: String!
+  state: [Symbol]!
+  winner: String
 }
 
 type Player
