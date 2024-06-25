@@ -28,8 +28,14 @@
           "deploymentBucketName": "amplify-tictactoe-second-0425a-deployment",
           "s3Key": "amplify-builds/preAuthentication-323557774a2f646d5335-build.zip"
         },
-        "startGame": {},
-        "playMove": {}
+        "startGame": {
+          "deploymentBucketName": "amplify-tictactoe-second-0425a-deployment",
+          "s3Key": "amplify-builds/startGame-65676c61683738473774-build.zip"
+        },
+        "playMove": {
+          "deploymentBucketName": "amplify-tictactoe-second-0425a-deployment",
+          "s3Key": "amplify-builds/playMove-595a3441394637723446-build.zip"
+        }
       }
     }
   },

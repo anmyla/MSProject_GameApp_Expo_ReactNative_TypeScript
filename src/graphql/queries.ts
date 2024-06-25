@@ -11,13 +11,17 @@ type GeneratedQuery<InputType, OutputType> = string & {
 export const getPlayer = /* GraphQL */ `query GetPlayer($username: String!) {
   getPlayer(username: $username) {
     id
-    username
     cognitoID
+    username
     name
     email
     createdAt
     updatedAt
     games {
+      nextToken
+      __typename
+    }
+    tokens {
       nextToken
       __typename
     }
@@ -41,8 +45,8 @@ export const listPlayers = /* GraphQL */ `query ListPlayers(
   ) {
     items {
       id
-      username
       cognitoID
+      username
       name
       email
       createdAt
@@ -56,6 +60,39 @@ export const listPlayers = /* GraphQL */ `query ListPlayers(
 ` as GeneratedQuery<
   APITypes.ListPlayersQueryVariables,
   APITypes.ListPlayersQuery
+>;
+export const searchPlayers = /* GraphQL */ `query SearchPlayers(
+  $filter: SearchablePlayerFilterInput
+  $sort: SearchablePlayerSortInput
+  $limit: Int
+  $nextToken: String
+  $from: Int
+) {
+  searchPlayers(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+    from: $from
+  ) {
+    items {
+      id
+      cognitoID
+      username
+      name
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    total
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.SearchPlayersQueryVariables,
+  APITypes.SearchPlayersQuery
 >;
 export const getGame = /* GraphQL */ `query GetGame($id: ID!) {
   getGame(id: $id) {
@@ -99,3 +136,85 @@ export const listGames = /* GraphQL */ `query ListGames(
   }
 }
 ` as GeneratedQuery<APITypes.ListGamesQueryVariables, APITypes.ListGamesQuery>;
+export const getExpoToken = /* GraphQL */ `query GetExpoToken($token: String!) {
+  getExpoToken(token: $token) {
+    id
+    token
+    playerUsername
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetExpoTokenQueryVariables,
+  APITypes.GetExpoTokenQuery
+>;
+export const listExpoTokens = /* GraphQL */ `query ListExpoTokens(
+  $token: String
+  $filter: ModelExpoTokenFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listExpoTokens(
+    token: $token
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      id
+      token
+      playerUsername
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListExpoTokensQueryVariables,
+  APITypes.ListExpoTokensQuery
+>;
+export const getExpoTicketsObject = /* GraphQL */ `query GetExpoTicketsObject($id: ID!) {
+  getExpoTicketsObject(id: $id) {
+    id
+    tickets
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetExpoTicketsObjectQueryVariables,
+  APITypes.GetExpoTicketsObjectQuery
+>;
+export const listExpoTicketsObjects = /* GraphQL */ `query ListExpoTicketsObjects(
+  $filter: ModelExpoTicketsObjectFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listExpoTicketsObjects(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      tickets
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListExpoTicketsObjectsQueryVariables,
+  APITypes.ListExpoTicketsObjectsQuery
+>;
