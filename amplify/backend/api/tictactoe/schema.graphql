@@ -4,16 +4,9 @@ type Mutation {
     @aws_cognito_user_pools
 }
 
-type GameData {
-  id: ID!
-  status: GameStatus!
-  turn: String!
-  state: [Symbol]!
-  winner: String
-}
-
 type Player
   @model
+  @searchable
   @key(fields: ["username"])
   @auth(
     rules: [
@@ -27,11 +20,35 @@ type Player
     ]
   ) {
   id: ID!
-  username: String!
   cognitoID: String!
+  username: String!
   name: String!
   email: AWSEmail!
   games: [PlayerGame] @connection(keyName: "byPlayer", fields: ["username"])
+  tokens: [ExpoToken] @connection(keyName: "byPlayer", fields: ["username"])
+}
+
+type PlayerGame
+  @model(queries: null)
+  @key(name: "byGame", fields: ["gameID"])
+  @key(name: "byPlayer", fields: ["playerUsername", "createdAt"])
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      {
+        allow: private
+        provider: iam
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  createdAt: String!
+  gameID: ID!
+  playerUsername: String!
+  owners: [String!]!
+  game: Game! @connection(fields: ["gameID"])
+  player: Player! @connection(fields: ["playerUsername"])
 }
 
 type Game
@@ -56,29 +73,6 @@ type Game
   players: [PlayerGame] @connection(keyName: "byGame", fields: ["id"])
 }
 
-type PlayerGame
-  @model(queries: null)
-  @key(name: "byGame", fields: ["gameID"])
-  @key(name: "byPlayer", fields: ["playerUsername", "createdAt"])
-  @auth(
-    rules: [
-      { allow: owner, ownerField: "owners", operations: [read] }
-      {
-        allow: private
-        provider: iam
-        operations: [read, create, update, delete]
-      }
-    ]
-  ) {
-  id: ID!
-  createdAt: String!
-  gameID: ID!
-  playerUsername: String!
-  owners: [String!]!
-  game: Game! @connection(fields: ["gameID"])
-  player: Player! @connection(fields: ["playerUsername"])
-}
-
 enum GameStatus {
   REQUESTED
   DECLINED
@@ -90,4 +84,38 @@ enum GameStatus {
 enum Symbol {
   x
   o
+}
+
+type ExpoToken
+  @model
+  @key(fields: ["token"])
+  @key(name: "byPlayer", fields: ["playerUsername"])
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "playerUsername", operations: [read, delete] }
+      {
+        allow: private
+        provider: iam
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  token: String!
+  playerUsername: String!
+}
+
+type ExpoTicketsObject
+  @model
+  @auth(
+    rules: [
+      {
+        allow: private
+        provider: iam
+        operations: [read, create, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  tickets: AWSJSON!
 }
