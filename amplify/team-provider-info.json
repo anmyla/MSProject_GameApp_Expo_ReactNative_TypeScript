@@ -34,7 +34,7 @@
         },
         "playMove": {
           "deploymentBucketName": "amplify-tictactoe-second-0425a-deployment",
-          "s3Key": "amplify-builds/playMove-595a3441394637723446-build.zip"
+          "s3Key": "amplify-builds/playMove-764567394a504d327336-build.zip"
         }
       }
     }
