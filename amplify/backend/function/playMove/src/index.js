@@ -27,5 +27,23 @@ exports.handler = async event => {
         },
         disableOffline: true
     });
+
+    const player = event.identity.username;
+    const gameID = event.identity.game;
+    const index = event.identity.index;
+    console.log(player, gameID, index);
+
+    //Get Game Object using id and make sure it exits
+
+    //Make sure Game is active
+
+    //Check that the current user is a participant in th game and that it is her turn
+
+    //Make sire that the index is valid(not > than 8 and is empty)
+
+    //Update state, checkif the move is a terminal one and update the winner, status, turn, and state
+
+    //Return the updated game
     
+
 };
