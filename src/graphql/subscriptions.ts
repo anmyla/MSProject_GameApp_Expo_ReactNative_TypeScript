@@ -8,183 +8,6 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateGame = /* GraphQL */ `subscription OnCreateGame {
-  onCreateGame {
-    id
-    status
-    owners
-    initiator
-    turn
-    state
-    winner
-    players {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateGameSubscriptionVariables,
-  APITypes.OnCreateGameSubscription
->;
-export const onUpdateGame = /* GraphQL */ `subscription OnUpdateGame {
-  onUpdateGame {
-    id
-    status
-    owners
-    initiator
-    turn
-    state
-    winner
-    players {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateGameSubscriptionVariables,
-  APITypes.OnUpdateGameSubscription
->;
-export const onDeleteGame = /* GraphQL */ `subscription OnDeleteGame {
-  onDeleteGame {
-    id
-    status
-    owners
-    initiator
-    turn
-    state
-    winner
-    players {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteGameSubscriptionVariables,
-  APITypes.OnDeleteGameSubscription
->;
-export const onCreatePlayerGame = /* GraphQL */ `subscription OnCreatePlayerGame {
-  onCreatePlayerGame {
-    id
-    createdAt
-    gameID
-    playerUsername
-    owners
-    game {
-      id
-      status
-      owners
-      initiator
-      turn
-      state
-      winner
-      createdAt
-      updatedAt
-      __typename
-    }
-    updatedAt
-    player {
-      id
-      username
-      cognitoID
-      name
-      email
-      createdAt
-      updatedAt
-      __typename
-    }
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreatePlayerGameSubscriptionVariables,
-  APITypes.OnCreatePlayerGameSubscription
->;
-export const onUpdatePlayerGame = /* GraphQL */ `subscription OnUpdatePlayerGame {
-  onUpdatePlayerGame {
-    id
-    createdAt
-    gameID
-    playerUsername
-    owners
-    game {
-      id
-      status
-      owners
-      initiator
-      turn
-      state
-      winner
-      createdAt
-      updatedAt
-      __typename
-    }
-    updatedAt
-    player {
-      id
-      username
-      cognitoID
-      name
-      email
-      createdAt
-      updatedAt
-      __typename
-    }
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdatePlayerGameSubscriptionVariables,
-  APITypes.OnUpdatePlayerGameSubscription
->;
-export const onDeletePlayerGame = /* GraphQL */ `subscription OnDeletePlayerGame {
-  onDeletePlayerGame {
-    id
-    createdAt
-    gameID
-    playerUsername
-    owners
-    game {
-      id
-      status
-      owners
-      initiator
-      turn
-      state
-      winner
-      createdAt
-      updatedAt
-      __typename
-    }
-    updatedAt
-    player {
-      id
-      username
-      cognitoID
-      name
-      email
-      createdAt
-      updatedAt
-      __typename
-    }
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeletePlayerGameSubscriptionVariables,
-  APITypes.OnDeletePlayerGameSubscription
->;
 export const onCreatePlayer = /* GraphQL */ `subscription OnCreatePlayer {
   onCreatePlayer {
     id
@@ -192,12 +15,12 @@ export const onCreatePlayer = /* GraphQL */ `subscription OnCreatePlayer {
     cognitoID
     name
     email
+    createdAt
+    updatedAt
     games {
       nextToken
       __typename
     }
-    createdAt
-    updatedAt
     __typename
   }
 }
@@ -212,12 +35,12 @@ export const onUpdatePlayer = /* GraphQL */ `subscription OnUpdatePlayer {
     cognitoID
     name
     email
+    createdAt
+    updatedAt
     games {
       nextToken
       __typename
     }
-    createdAt
-    updatedAt
     __typename
   }
 }
@@ -232,16 +55,193 @@ export const onDeletePlayer = /* GraphQL */ `subscription OnDeletePlayer {
     cognitoID
     name
     email
+    createdAt
+    updatedAt
     games {
       nextToken
       __typename
     }
-    createdAt
-    updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
   APITypes.OnDeletePlayerSubscriptionVariables,
   APITypes.OnDeletePlayerSubscription
+>;
+export const onCreateGame = /* GraphQL */ `subscription OnCreateGame($owners: String) {
+  onCreateGame(owners: $owners) {
+    id
+    status
+    owners
+    initiator
+    turn
+    state
+    winner
+    createdAt
+    updatedAt
+    players {
+      nextToken
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateGameSubscriptionVariables,
+  APITypes.OnCreateGameSubscription
+>;
+export const onUpdateGame = /* GraphQL */ `subscription OnUpdateGame($owners: String) {
+  onUpdateGame(owners: $owners) {
+    id
+    status
+    owners
+    initiator
+    turn
+    state
+    winner
+    createdAt
+    updatedAt
+    players {
+      nextToken
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateGameSubscriptionVariables,
+  APITypes.OnUpdateGameSubscription
+>;
+export const onDeleteGame = /* GraphQL */ `subscription OnDeleteGame($owners: String) {
+  onDeleteGame(owners: $owners) {
+    id
+    status
+    owners
+    initiator
+    turn
+    state
+    winner
+    createdAt
+    updatedAt
+    players {
+      nextToken
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteGameSubscriptionVariables,
+  APITypes.OnDeleteGameSubscription
+>;
+export const onCreatePlayerGame = /* GraphQL */ `subscription OnCreatePlayerGame($owners: String) {
+  onCreatePlayerGame(owners: $owners) {
+    id
+    createdAt
+    gameID
+    playerUsername
+    owners
+    updatedAt
+    player {
+      id
+      username
+      cognitoID
+      name
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    game {
+      id
+      status
+      owners
+      initiator
+      turn
+      state
+      winner
+      createdAt
+      updatedAt
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreatePlayerGameSubscriptionVariables,
+  APITypes.OnCreatePlayerGameSubscription
+>;
+export const onUpdatePlayerGame = /* GraphQL */ `subscription OnUpdatePlayerGame($owners: String) {
+  onUpdatePlayerGame(owners: $owners) {
+    id
+    createdAt
+    gameID
+    playerUsername
+    owners
+    updatedAt
+    player {
+      id
+      username
+      cognitoID
+      name
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    game {
+      id
+      status
+      owners
+      initiator
+      turn
+      state
+      winner
+      createdAt
+      updatedAt
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdatePlayerGameSubscriptionVariables,
+  APITypes.OnUpdatePlayerGameSubscription
+>;
+export const onDeletePlayerGame = /* GraphQL */ `subscription OnDeletePlayerGame($owners: String) {
+  onDeletePlayerGame(owners: $owners) {
+    id
+    createdAt
+    gameID
+    playerUsername
+    owners
+    updatedAt
+    player {
+      id
+      username
+      cognitoID
+      name
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    game {
+      id
+      status
+      owners
+      initiator
+      turn
+      state
+      winner
+      createdAt
+      updatedAt
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeletePlayerGameSubscriptionVariables,
+  APITypes.OnDeletePlayerGameSubscription
 >;

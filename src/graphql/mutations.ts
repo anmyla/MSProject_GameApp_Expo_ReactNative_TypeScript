@@ -8,6 +8,89 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
+export const startGame = /* GraphQL */ `mutation StartGame($invitee: String!) {
+  startGame(invitee: $invitee) {
+    id
+    status
+    turn
+    state
+    winner
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.StartGameMutationVariables,
+  APITypes.StartGameMutation
+>;
+export const createPlayer = /* GraphQL */ `mutation CreatePlayer(
+  $input: CreatePlayerInput!
+  $condition: ModelPlayerConditionInput
+) {
+  createPlayer(input: $input, condition: $condition) {
+    id
+    username
+    cognitoID
+    name
+    email
+    createdAt
+    updatedAt
+    games {
+      nextToken
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreatePlayerMutationVariables,
+  APITypes.CreatePlayerMutation
+>;
+export const updatePlayer = /* GraphQL */ `mutation UpdatePlayer(
+  $input: UpdatePlayerInput!
+  $condition: ModelPlayerConditionInput
+) {
+  updatePlayer(input: $input, condition: $condition) {
+    id
+    username
+    cognitoID
+    name
+    email
+    createdAt
+    updatedAt
+    games {
+      nextToken
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdatePlayerMutationVariables,
+  APITypes.UpdatePlayerMutation
+>;
+export const deletePlayer = /* GraphQL */ `mutation DeletePlayer(
+  $input: DeletePlayerInput!
+  $condition: ModelPlayerConditionInput
+) {
+  deletePlayer(input: $input, condition: $condition) {
+    id
+    username
+    cognitoID
+    name
+    email
+    createdAt
+    updatedAt
+    games {
+      nextToken
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeletePlayerMutationVariables,
+  APITypes.DeletePlayerMutation
+>;
 export const createGame = /* GraphQL */ `mutation CreateGame(
   $input: CreateGameInput!
   $condition: ModelGameConditionInput
@@ -20,12 +103,12 @@ export const createGame = /* GraphQL */ `mutation CreateGame(
     turn
     state
     winner
+    createdAt
+    updatedAt
     players {
       nextToken
       __typename
     }
-    createdAt
-    updatedAt
     __typename
   }
 }
@@ -45,12 +128,12 @@ export const updateGame = /* GraphQL */ `mutation UpdateGame(
     turn
     state
     winner
+    createdAt
+    updatedAt
     players {
       nextToken
       __typename
     }
-    createdAt
-    updatedAt
     __typename
   }
 }
@@ -70,12 +153,12 @@ export const deleteGame = /* GraphQL */ `mutation DeleteGame(
     turn
     state
     winner
+    createdAt
+    updatedAt
     players {
       nextToken
       __typename
     }
-    createdAt
-    updatedAt
     __typename
   }
 }
@@ -93,6 +176,17 @@ export const createPlayerGame = /* GraphQL */ `mutation CreatePlayerGame(
     gameID
     playerUsername
     owners
+    updatedAt
+    player {
+      id
+      username
+      cognitoID
+      name
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
     game {
       id
       status
@@ -101,17 +195,6 @@ export const createPlayerGame = /* GraphQL */ `mutation CreatePlayerGame(
       turn
       state
       winner
-      createdAt
-      updatedAt
-      __typename
-    }
-    updatedAt
-    player {
-      id
-      username
-      cognitoID
-      name
-      email
       createdAt
       updatedAt
       __typename
@@ -133,6 +216,17 @@ export const updatePlayerGame = /* GraphQL */ `mutation UpdatePlayerGame(
     gameID
     playerUsername
     owners
+    updatedAt
+    player {
+      id
+      username
+      cognitoID
+      name
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
     game {
       id
       status
@@ -141,17 +235,6 @@ export const updatePlayerGame = /* GraphQL */ `mutation UpdatePlayerGame(
       turn
       state
       winner
-      createdAt
-      updatedAt
-      __typename
-    }
-    updatedAt
-    player {
-      id
-      username
-      cognitoID
-      name
-      email
       createdAt
       updatedAt
       __typename
@@ -173,6 +256,17 @@ export const deletePlayerGame = /* GraphQL */ `mutation DeletePlayerGame(
     gameID
     playerUsername
     owners
+    updatedAt
+    player {
+      id
+      username
+      cognitoID
+      name
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
     game {
       id
       status
@@ -185,90 +279,10 @@ export const deletePlayerGame = /* GraphQL */ `mutation DeletePlayerGame(
       updatedAt
       __typename
     }
-    updatedAt
-    player {
-      id
-      username
-      cognitoID
-      name
-      email
-      createdAt
-      updatedAt
-      __typename
-    }
     __typename
   }
 }
 ` as GeneratedMutation<
   APITypes.DeletePlayerGameMutationVariables,
   APITypes.DeletePlayerGameMutation
->;
-export const createPlayer = /* GraphQL */ `mutation CreatePlayer(
-  $input: CreatePlayerInput!
-  $condition: ModelPlayerConditionInput
-) {
-  createPlayer(input: $input, condition: $condition) {
-    id
-    username
-    cognitoID
-    name
-    email
-    games {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.CreatePlayerMutationVariables,
-  APITypes.CreatePlayerMutation
->;
-export const updatePlayer = /* GraphQL */ `mutation UpdatePlayer(
-  $input: UpdatePlayerInput!
-  $condition: ModelPlayerConditionInput
-) {
-  updatePlayer(input: $input, condition: $condition) {
-    id
-    username
-    cognitoID
-    name
-    email
-    games {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.UpdatePlayerMutationVariables,
-  APITypes.UpdatePlayerMutation
->;
-export const deletePlayer = /* GraphQL */ `mutation DeletePlayer(
-  $input: DeletePlayerInput!
-  $condition: ModelPlayerConditionInput
-) {
-  deletePlayer(input: $input, condition: $condition) {
-    id
-    username
-    cognitoID
-    name
-    email
-    games {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.DeletePlayerMutationVariables,
-  APITypes.DeletePlayerMutation
 >;
