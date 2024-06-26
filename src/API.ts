@@ -99,6 +99,21 @@ export type SearchablePlayerConnection = {
   total?: number | null,
 };
 
+export type onUpdateGameByIdSubscriptionVariables = {
+  id: string,
+};
+
+export type onUpdateGameByIdSubscription = {
+  onUpdateGameById?:  {
+    __typename: "Game",
+    id: string,
+    status: GameStatus,
+    turn: string,
+    state: Array< Symbol | null >,
+    winner?: string | null,
+  } | null,
+};
+
 export type getGameQueryVariables = {
   id: string,
 };

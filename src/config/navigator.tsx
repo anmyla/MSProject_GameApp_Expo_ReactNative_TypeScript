@@ -59,7 +59,8 @@ const navigatorOptions: StackNavigationOptions = {
 
 export default function Navigator(): ReactElement {
   const { user } = useAuth();
-  const navigatorRef = useRef<NavigationContainerRef | null>(null);
+  const navigatorRef =
+    useRef<NavigationContainerRef<StackNavigatorParams> | null>(null);
   const [isNavigatorReady, setIsNavigatorReady] = useState(false);
 
   useEffect(() => {

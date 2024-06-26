@@ -18,7 +18,7 @@ export default function GameItem({
     onPress
 }: GameItemProps): ReactElement | null {
     const { user } = useAuth();
-    const [playerGame, setPlayerGame] = useState(playerGameProp);
+    const [playerGame, setPlayerGame] = useState<PlayerGameType>(playerGameProp);
     const animationRef = useRef<Animated.Value>(new Animated.Value(0));
 
     const getResult = (playerGame: PlayerGameType): "win" | "loss" | "draw" | false => {
