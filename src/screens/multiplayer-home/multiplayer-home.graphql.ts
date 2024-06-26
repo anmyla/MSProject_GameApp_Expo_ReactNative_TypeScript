@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import { GetPlayerQuery } from "@api";
+import { GetPlayerQuery } from "../../API";
 
 export const getPlayer = gql`
     query GetPlayer(

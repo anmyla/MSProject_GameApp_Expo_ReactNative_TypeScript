@@ -1,5 +1,9 @@
-import { ReactElement } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { ReactElement, useEffect, useRef, useState } from "react";
+import {
+  NavigationContainer,
+  NavigationContainerRef,
+  StackActions,
+} from "@react-navigation/native";
 import {
   createStackNavigator,
   StackNavigationOptions,
@@ -15,20 +19,21 @@ import {
   MultiplayerHome,
   MultiplayerGame,
 } from "../screens";
+import { useAuth } from "../contexts/auth-context";
+import * as Notifications from "expo-notifications";
 
 export type StackNavigatorParams = {
   Home: undefined;
   SinglePlayerGame: undefined;
   Settings: undefined;
   Login: { redirect: keyof StackNavigatorParams } | undefined;
-    SignUp: { username: string } | undefined;
+  SignUp: { username: string } | undefined;
   ChangePassword: undefined;
-    ForgotPassword: undefined;
-    MultiplayerHome: undefined;
-    MultiplayerGame:
-        | { gameID: string; invitee?: undefined }
-        | { invitee: string; gameID?: undefined };
-
+  ForgotPassword: undefined;
+  MultiplayerHome: undefined;
+  MultiplayerGame:
+    | { gameID: string; invitee?: undefined }
+    | { invitee: string; gameID?: undefined };
 };
 
 const Stack = createStackNavigator<StackNavigatorParams>();
@@ -53,8 +58,44 @@ const navigatorOptions: StackNavigationOptions = {
 };
 
 export default function Navigator(): ReactElement {
+  const { user } = useAuth();
+  const navigatorRef = useRef<NavigationContainerRef | null>(null);
+  const [isNavigatorReady, setIsNavigatorReady] = useState(false);
+
+  useEffect(() => {
+    if (user && isNavigatorReady) {
+      const subscription =
+        Notifications.addNotificationResponseReceivedListener((response) => {
+          const gameID = response.notification.request.content.data.gameId;
+
+          if (
+            navigatorRef.current?.getCurrentRoute()?.name === "MultiplayerGame"
+          ) {
+            navigatorRef.current.dispatch(
+              StackActions.replace("MultiplayerGame", {
+                gameID,
+              })
+            );
+          } else {
+            navigatorRef.current?.navigate("MultiplayerGame", {
+              gameID,
+            });
+          }
+        });
+
+      return () => {
+        subscription.remove();
+      };
+    }
+  }, [user, isNavigatorReady]);
+
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      ref={navigatorRef}
+      onReady={() => {
+        setIsNavigatorReady(true);
+      }}
+    >
       <Stack.Navigator screenOptions={navigatorOptions}>
         <Stack.Screen
           name="Home"

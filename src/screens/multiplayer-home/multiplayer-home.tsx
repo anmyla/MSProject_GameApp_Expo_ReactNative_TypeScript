@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { Alert, View, FlatList, ActivityIndicator, RefreshControl } from "react-native";
-import { MyButton, GradientBackground } from "../../components";
+import { MyButton, GradientBackground, MyText } from "../../components";
 import styles from "./multiplayer-home.styles";
 import { useAuth } from "../../contexts/auth-context";
 import { getPlayer, PlayerGameType } from "./multiplayer-home.graphql";
@@ -14,7 +14,6 @@ import PlayersModal from "./players-modal/players-modal";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { StackNavigatorParams } from "../../config/navigator";
 import * as Notifications from "expo-notifications";
-import MyText from "../../components/my-text/my-text";
 
 type MultiplayerHomeScreenNavigationProp = StackNavigationProp<
     StackNavigatorParams,
@@ -28,7 +27,7 @@ type MultiplayerHomeProps = {
 export default function MultiplayerHome({ navigation }: MultiplayerHomeProps): ReactElement {
     const { user } = useAuth();
     const [playerGames, setPlayerGames] = useState<PlayerGameType[] | null>(null);
-    const [nextToken, setNextToken] = useState<string | null>(null);
+    const [nextToken, setNextToken] = useState<string | null | undefined>(null);
     const [loading, setLoading] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
     const [playersModal, setPlayersModal] = useState(false);

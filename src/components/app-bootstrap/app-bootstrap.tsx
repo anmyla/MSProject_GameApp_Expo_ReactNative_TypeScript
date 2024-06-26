@@ -10,7 +10,17 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { Auth, Hub } from "aws-amplify";
 import { useAuth } from "../../contexts/auth-context";
+import * as Notifications from "expo-notifications";
+import { initNotifications } from "../../utils"
 
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: false,
+      shouldSetBadge: false
+  })
+});
 
 type AppBootstrapProps = {
   children: ReactNode;
@@ -34,6 +44,7 @@ export default function AppBootstrap({
       try {
         const user = await Auth.currentAuthenticatedUser();
         setUser(user);
+        initNotifications();
       } catch (error) {
         console.log(error);
         setUser(null);
@@ -48,6 +59,7 @@ export default function AppBootstrap({
         case "signOut": setUser(null);
         break;
         case "signIn": setUser(data);
+        initNotifications();
         break;
       default:
       break;
