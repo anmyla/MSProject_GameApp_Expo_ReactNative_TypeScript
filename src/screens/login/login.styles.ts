@@ -22,6 +22,11 @@ signUpLinkDiv: {
     alignContent: 'center',
     paddingHorizontal: 20
 },
+forgotPasswordDiv: {
+    marginTop: 50,
+    alignContent: 'center',
+    paddingHorizontal: 20
+},
 signUpLink: {
     color: '#f2f2f2',
     fontFamily: "DeliusUnicase-Bold",

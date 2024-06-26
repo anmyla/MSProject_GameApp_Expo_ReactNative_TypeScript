@@ -4,7 +4,7 @@ import { Text, SafeAreaView, View } from 'react-native'
 import styles from './single-player-games.styles';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { StackNavigatorParams } from '../../config/navigator';
-import { Game, GradienBackground, MyButton } from '../../components';
+import { Game, GradientBackground, MyButton } from '../../components';
 
 type SinglePlayerGameProps = {
   navigation: StackNavigationProp<StackNavigatorParams, "SinglePlayerGame">;
@@ -14,11 +14,11 @@ export default function SinglePlayerGame({ navigation }: SinglePlayerGameProps):
   
 
   return (
-    <GradienBackground>
+    <GradientBackground>
     <SafeAreaView style= {styles.container}>
       <Game />
     </SafeAreaView>
-    </GradienBackground>
+    </GradientBackground>
   )
 }
 

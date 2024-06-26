@@ -3,7 +3,7 @@ import { View, ScrollView, Image, Text, Alert } from "react-native";
 import styles from "./home.styles";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { StackNavigatorParams } from "../../config/navigator";
-import { GradienBackground, MyButton } from "../../components";
+import { GradientBackground, MyButton } from "../../components";
 import { useAuth } from "../../contexts/auth-context";
 import { Auth } from "aws-amplify";
 
@@ -16,7 +16,7 @@ export default function Home({ navigation }: HomeProps): ReactElement {
   const [signingOut, setSigningOut] = useState(false);
 
   return (
-    <GradienBackground>
+    <GradientBackground>
       <ScrollView contentContainerStyle={styles.container}>
         <Image
           style={styles.logo}
@@ -30,7 +30,16 @@ export default function Home({ navigation }: HomeProps): ReactElement {
               navigation.navigate("SinglePlayerGame");
             }}
           />
-          <MyButton title="Multi PLayer" style={styles.button} />
+          <MyButton 
+            onPress={() => {
+              if(user){
+                navigation.navigate("MultiplayerHome");
+              }
+              else{
+                navigation.navigate("Login");
+              }
+            }}
+          title="Multi Player" style={styles.button} />
           <MyButton
             loading={signingOut}
             title={user ? "Logout" : "Login"}
@@ -66,6 +75,6 @@ export default function Home({ navigation }: HomeProps): ReactElement {
           </View>
         </View>
       </ScrollView>
-    </GradienBackground>
+    </GradientBackground>
   );
 }

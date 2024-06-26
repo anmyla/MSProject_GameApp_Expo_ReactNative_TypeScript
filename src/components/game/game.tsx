@@ -129,8 +129,8 @@ export default function Game({}: GameProps): ReactElement {
         <Board
           disabled={Boolean(isTerminal(state)) || turn !== "HUMAN"}
           state={state}
-          onPlay={handlePlay}
-        />
+          onPlay={handlePlay} 
+          />
       </View>
       {gameResult && (
         <View style={styles.modal}>

@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, TouchableOpacity, Switch } from "react-native";
 import React, { ReactElement } from "react";
-import { GradienBackground } from "../../components";
+import { GradientBackground } from "../../components";
 import styles from "./settings.styles";
 import { difficulty, useSettings } from "../../contexts/settings-context";
 
@@ -11,7 +11,7 @@ export default function Settings(): ReactElement | null {
   }
 
   return (
-    <GradienBackground>
+    <GradientBackground>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.field}>
           <Text style={styles.label}>
@@ -70,6 +70,6 @@ export default function Settings(): ReactElement | null {
           />
         </View>
       </ScrollView>
-    </GradienBackground>
+    </GradientBackground>
   );
 }

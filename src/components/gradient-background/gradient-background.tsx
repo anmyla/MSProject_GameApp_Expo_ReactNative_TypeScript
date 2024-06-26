@@ -6,7 +6,7 @@ import { LinearGradient } from "expo-linear-gradient";
 type GradienBackgroundProps = {
   children: ReactNode;
 };
-export default function GradienBackground({
+export default function GradientBackground({
   children,
 }: GradienBackgroundProps): ReactElement {
   return (

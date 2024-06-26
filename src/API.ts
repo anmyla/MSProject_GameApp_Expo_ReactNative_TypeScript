@@ -2,13 +2,18 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type GameData = {
-  __typename: "GameData",
+export type Game = {
+  __typename: "Game",
   id: string,
   status: GameStatus,
+  owners: Array< string >,
+  initiator: string,
   turn: string,
   state: Array< Symbol | null >,
   winner?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  players?: ModelPlayerGameConnection | null,
 };
 
 export enum GameStatus {
@@ -25,85 +30,6 @@ export enum Symbol {
   o = "o",
 }
 
-
-export type ExpoToken = {
-  __typename: "ExpoToken",
-  id: string,
-  token: string,
-  playerUsername: string,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type CreatePlayerInput = {
-  id?: string | null,
-  cognitoID: string,
-  username: string,
-  name: string,
-  email: string,
-};
-
-export type ModelPlayerConditionInput = {
-  cognitoID?: ModelStringInput | null,
-  name?: ModelStringInput | null,
-  email?: ModelStringInput | null,
-  and?: Array< ModelPlayerConditionInput | null > | null,
-  or?: Array< ModelPlayerConditionInput | null > | null,
-  not?: ModelPlayerConditionInput | null,
-};
-
-export type ModelStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null",
-}
-
-
-export type ModelSizeInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-};
-
-export type Player = {
-  __typename: "Player",
-  id: string,
-  cognitoID: string,
-  username: string,
-  name: string,
-  email: string,
-  createdAt: string,
-  updatedAt: string,
-  games?: ModelPlayerGameConnection | null,
-  tokens?: ModelExpoTokenConnection | null,
-};
 
 export type ModelPlayerGameConnection = {
   __typename: "ModelPlayerGameConnection",
@@ -123,18 +49,17 @@ export type PlayerGame = {
   game: Game,
 };
 
-export type Game = {
-  __typename: "Game",
+export type Player = {
+  __typename: "Player",
   id: string,
-  status: GameStatus,
-  owners: Array< string >,
-  initiator: string,
-  turn: string,
-  state: Array< Symbol | null >,
-  winner?: string | null,
+  cognitoID: string,
+  username: string,
+  name: string,
+  email: string,
   createdAt: string,
   updatedAt: string,
-  players?: ModelPlayerGameConnection | null,
+  games?: ModelPlayerGameConnection | null,
+  tokens?: ModelExpoTokenConnection | null,
 };
 
 export type ModelExpoTokenConnection = {
@@ -143,247 +68,27 @@ export type ModelExpoTokenConnection = {
   nextToken?: string | null,
 };
 
-export type UpdatePlayerInput = {
-  id?: string | null,
-  cognitoID?: string | null,
-  username: string,
-  name?: string | null,
-  email?: string | null,
-};
-
-export type DeletePlayerInput = {
-  username: string,
-};
-
-export type CreatePlayerGameInput = {
-  id?: string | null,
-  createdAt?: string | null,
-  gameID: string,
+export type ExpoToken = {
+  __typename: "ExpoToken",
+  id: string,
+  token: string,
   playerUsername: string,
-  owners: Array< string >,
+  createdAt: string,
+  updatedAt: string,
 };
 
-export type ModelPlayerGameConditionInput = {
-  createdAt?: ModelStringInput | null,
-  gameID?: ModelIDInput | null,
-  playerUsername?: ModelStringInput | null,
-  owners?: ModelStringInput | null,
-  and?: Array< ModelPlayerGameConditionInput | null > | null,
-  or?: Array< ModelPlayerGameConditionInput | null > | null,
-  not?: ModelPlayerGameConditionInput | null,
-};
-
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
-export type UpdatePlayerGameInput = {
+export type GameData = {
+  __typename: "GameData",
   id: string,
-  createdAt?: string | null,
-  gameID?: string | null,
-  playerUsername?: string | null,
-  owners?: Array< string > | null,
-};
-
-export type DeletePlayerGameInput = {
-  id: string,
-};
-
-export type CreateGameInput = {
-  id?: string | null,
   status: GameStatus,
-  owners: Array< string >,
-  initiator: string,
   turn: string,
   state: Array< Symbol | null >,
   winner?: string | null,
 };
 
-export type ModelGameConditionInput = {
-  status?: ModelGameStatusInput | null,
-  initiator?: ModelStringInput | null,
-  turn?: ModelStringInput | null,
-  state?: ModelSymbolListInput | null,
-  winner?: ModelStringInput | null,
-  and?: Array< ModelGameConditionInput | null > | null,
-  or?: Array< ModelGameConditionInput | null > | null,
-  not?: ModelGameConditionInput | null,
-};
-
-export type ModelGameStatusInput = {
-  eq?: GameStatus | null,
-  ne?: GameStatus | null,
-};
-
-export type ModelSymbolListInput = {
-  eq?: Array< Symbol | null > | null,
-  ne?: Array< Symbol | null > | null,
-  contains?: Symbol | null,
-  notContains?: Symbol | null,
-};
-
-export type UpdateGameInput = {
-  id: string,
-  status?: GameStatus | null,
-  owners?: Array< string > | null,
-  initiator?: string | null,
-  turn?: string | null,
-  state?: Array< Symbol | null > | null,
-  winner?: string | null,
-};
-
-export type DeleteGameInput = {
-  id: string,
-};
-
-export type CreateExpoTokenInput = {
-  id?: string | null,
-  token: string,
-  playerUsername: string,
-};
-
-export type ModelExpoTokenConditionInput = {
-  and?: Array< ModelExpoTokenConditionInput | null > | null,
-  or?: Array< ModelExpoTokenConditionInput | null > | null,
-  not?: ModelExpoTokenConditionInput | null,
-};
-
-export type UpdateExpoTokenInput = {
-  id?: string | null,
-  token: string,
-  playerUsername?: string | null,
-};
-
-export type DeleteExpoTokenInput = {
-  token: string,
-};
-
-export type CreateExpoTicketsObjectInput = {
-  id?: string | null,
-  tickets: string,
-};
-
-export type ModelExpoTicketsObjectConditionInput = {
-  tickets?: ModelStringInput | null,
-  and?: Array< ModelExpoTicketsObjectConditionInput | null > | null,
-  or?: Array< ModelExpoTicketsObjectConditionInput | null > | null,
-  not?: ModelExpoTicketsObjectConditionInput | null,
-};
-
-export type ExpoTicketsObject = {
-  __typename: "ExpoTicketsObject",
-  id: string,
-  tickets: string,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type UpdateExpoTicketsObjectInput = {
-  id: string,
-  tickets?: string | null,
-};
-
-export type DeleteExpoTicketsObjectInput = {
-  id: string,
-};
-
-export type ModelPlayerFilterInput = {
-  id?: ModelIDInput | null,
-  cognitoID?: ModelStringInput | null,
-  username?: ModelStringInput | null,
-  name?: ModelStringInput | null,
-  email?: ModelStringInput | null,
-  and?: Array< ModelPlayerFilterInput | null > | null,
-  or?: Array< ModelPlayerFilterInput | null > | null,
-  not?: ModelPlayerFilterInput | null,
-};
-
 export enum ModelSortDirection {
   ASC = "ASC",
   DESC = "DESC",
-}
-
-
-export type ModelPlayerConnection = {
-  __typename: "ModelPlayerConnection",
-  items:  Array<Player | null >,
-  nextToken?: string | null,
-};
-
-export type SearchablePlayerFilterInput = {
-  id?: SearchableIDFilterInput | null,
-  cognitoID?: SearchableStringFilterInput | null,
-  username?: SearchableStringFilterInput | null,
-  name?: SearchableStringFilterInput | null,
-  email?: SearchableStringFilterInput | null,
-  and?: Array< SearchablePlayerFilterInput | null > | null,
-  or?: Array< SearchablePlayerFilterInput | null > | null,
-  not?: SearchablePlayerFilterInput | null,
-};
-
-export type SearchableIDFilterInput = {
-  ne?: string | null,
-  gt?: string | null,
-  lt?: string | null,
-  gte?: string | null,
-  lte?: string | null,
-  eq?: string | null,
-  match?: string | null,
-  matchPhrase?: string | null,
-  matchPhrasePrefix?: string | null,
-  multiMatch?: string | null,
-  exists?: boolean | null,
-  wildcard?: string | null,
-  regexp?: string | null,
-  range?: Array< string | null > | null,
-};
-
-export type SearchableStringFilterInput = {
-  ne?: string | null,
-  gt?: string | null,
-  lt?: string | null,
-  gte?: string | null,
-  lte?: string | null,
-  eq?: string | null,
-  match?: string | null,
-  matchPhrase?: string | null,
-  matchPhrasePrefix?: string | null,
-  multiMatch?: string | null,
-  exists?: boolean | null,
-  wildcard?: string | null,
-  regexp?: string | null,
-  range?: Array< string | null > | null,
-};
-
-export type SearchablePlayerSortInput = {
-  field?: SearchablePlayerSortableFields | null,
-  direction?: SearchableSortDirection | null,
-};
-
-export enum SearchablePlayerSortableFields {
-  id = "id",
-  cognitoID = "cognitoID",
-  username = "username",
-  name = "name",
-  email = "email",
-}
-
-
-export enum SearchableSortDirection {
-  asc = "asc",
-  desc = "desc",
 }
 
 
@@ -394,69 +99,51 @@ export type SearchablePlayerConnection = {
   total?: number | null,
 };
 
-export type ModelGameFilterInput = {
-  id?: ModelIDInput | null,
-  status?: ModelGameStatusInput | null,
-  owners?: ModelStringInput | null,
-  initiator?: ModelStringInput | null,
-  turn?: ModelStringInput | null,
-  state?: ModelSymbolListInput | null,
-  winner?: ModelStringInput | null,
-  and?: Array< ModelGameFilterInput | null > | null,
-  or?: Array< ModelGameFilterInput | null > | null,
-  not?: ModelGameFilterInput | null,
+export type getGameQueryVariables = {
+  id: string,
 };
 
-export type ModelGameConnection = {
-  __typename: "ModelGameConnection",
-  items:  Array<Game | null >,
-  nextToken?: string | null,
-};
-
-export type ModelExpoTokenFilterInput = {
-  id?: ModelIDInput | null,
-  token?: ModelStringInput | null,
-  playerUsername?: ModelStringInput | null,
-  and?: Array< ModelExpoTokenFilterInput | null > | null,
-  or?: Array< ModelExpoTokenFilterInput | null > | null,
-  not?: ModelExpoTokenFilterInput | null,
-};
-
-export type ModelExpoTicketsObjectFilterInput = {
-  id?: ModelIDInput | null,
-  tickets?: ModelStringInput | null,
-  and?: Array< ModelExpoTicketsObjectFilterInput | null > | null,
-  or?: Array< ModelExpoTicketsObjectFilterInput | null > | null,
-  not?: ModelExpoTicketsObjectFilterInput | null,
-};
-
-export type ModelExpoTicketsObjectConnection = {
-  __typename: "ModelExpoTicketsObjectConnection",
-  items:  Array<ExpoTicketsObject | null >,
-  nextToken?: string | null,
-};
-
-export type StartGameMutationVariables = {
-  invitee: string,
-};
-
-export type StartGameMutation = {
-  startGame?:  {
-    __typename: "GameData",
+export type getGameQuery = {
+  getGame?:  {
+    __typename: "Game",
     id: string,
     status: GameStatus,
+    owners: Array< string >,
+    initiator: string,
     turn: string,
     state: Array< Symbol | null >,
     winner?: string | null,
+    players?:  {
+      __typename: "ModelPlayerGameConnection",
+      items:  Array< {
+        __typename: "PlayerGame",
+        player:  {
+          __typename: "Player",
+          username: string,
+          name: string,
+        },
+      } | null >,
+    } | null,
   } | null,
 };
 
-export type PlayMoveMutationVariables = {
+export type startGameMutationVariables = {
+  invitee: string,
+};
+
+export type startGameMutation = {
+  startGame?:  {
+    __typename: "GameData",
+    id: string,
+  } | null,
+};
+
+export type playMoveMutationVariables = {
   game: string,
   index: number,
 };
 
-export type PlayMoveMutation = {
+export type playMoveMutation = {
   playMove?:  {
     __typename: "GameData",
     id: string,
@@ -467,932 +154,61 @@ export type PlayMoveMutation = {
   } | null,
 };
 
-export type AddExpoTokenMutationVariables = {
-  token: string,
-};
-
-export type AddExpoTokenMutation = {
-  addExpoToken?:  {
-    __typename: "ExpoToken",
-    id: string,
-    token: string,
-    playerUsername: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type CreatePlayerMutationVariables = {
-  input: CreatePlayerInput,
-  condition?: ModelPlayerConditionInput | null,
-};
-
-export type CreatePlayerMutation = {
-  createPlayer?:  {
-    __typename: "Player",
-    id: string,
-    cognitoID: string,
-    username: string,
-    name: string,
-    email: string,
-    createdAt: string,
-    updatedAt: string,
-    games?:  {
-      __typename: "ModelPlayerGameConnection",
-      nextToken?: string | null,
-    } | null,
-    tokens?:  {
-      __typename: "ModelExpoTokenConnection",
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type UpdatePlayerMutationVariables = {
-  input: UpdatePlayerInput,
-  condition?: ModelPlayerConditionInput | null,
-};
-
-export type UpdatePlayerMutation = {
-  updatePlayer?:  {
-    __typename: "Player",
-    id: string,
-    cognitoID: string,
-    username: string,
-    name: string,
-    email: string,
-    createdAt: string,
-    updatedAt: string,
-    games?:  {
-      __typename: "ModelPlayerGameConnection",
-      nextToken?: string | null,
-    } | null,
-    tokens?:  {
-      __typename: "ModelExpoTokenConnection",
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type DeletePlayerMutationVariables = {
-  input: DeletePlayerInput,
-  condition?: ModelPlayerConditionInput | null,
-};
-
-export type DeletePlayerMutation = {
-  deletePlayer?:  {
-    __typename: "Player",
-    id: string,
-    cognitoID: string,
-    username: string,
-    name: string,
-    email: string,
-    createdAt: string,
-    updatedAt: string,
-    games?:  {
-      __typename: "ModelPlayerGameConnection",
-      nextToken?: string | null,
-    } | null,
-    tokens?:  {
-      __typename: "ModelExpoTokenConnection",
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type CreatePlayerGameMutationVariables = {
-  input: CreatePlayerGameInput,
-  condition?: ModelPlayerGameConditionInput | null,
-};
-
-export type CreatePlayerGameMutation = {
-  createPlayerGame?:  {
-    __typename: "PlayerGame",
-    id: string,
-    createdAt: string,
-    gameID: string,
-    playerUsername: string,
-    owners: Array< string >,
-    updatedAt: string,
-    player:  {
-      __typename: "Player",
-      id: string,
-      cognitoID: string,
-      username: string,
-      name: string,
-      email: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    game:  {
-      __typename: "Game",
-      id: string,
-      status: GameStatus,
-      owners: Array< string >,
-      initiator: string,
-      turn: string,
-      state: Array< Symbol | null >,
-      winner?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    },
-  } | null,
-};
-
-export type UpdatePlayerGameMutationVariables = {
-  input: UpdatePlayerGameInput,
-  condition?: ModelPlayerGameConditionInput | null,
-};
-
-export type UpdatePlayerGameMutation = {
-  updatePlayerGame?:  {
-    __typename: "PlayerGame",
-    id: string,
-    createdAt: string,
-    gameID: string,
-    playerUsername: string,
-    owners: Array< string >,
-    updatedAt: string,
-    player:  {
-      __typename: "Player",
-      id: string,
-      cognitoID: string,
-      username: string,
-      name: string,
-      email: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    game:  {
-      __typename: "Game",
-      id: string,
-      status: GameStatus,
-      owners: Array< string >,
-      initiator: string,
-      turn: string,
-      state: Array< Symbol | null >,
-      winner?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    },
-  } | null,
-};
-
-export type DeletePlayerGameMutationVariables = {
-  input: DeletePlayerGameInput,
-  condition?: ModelPlayerGameConditionInput | null,
-};
-
-export type DeletePlayerGameMutation = {
-  deletePlayerGame?:  {
-    __typename: "PlayerGame",
-    id: string,
-    createdAt: string,
-    gameID: string,
-    playerUsername: string,
-    owners: Array< string >,
-    updatedAt: string,
-    player:  {
-      __typename: "Player",
-      id: string,
-      cognitoID: string,
-      username: string,
-      name: string,
-      email: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    game:  {
-      __typename: "Game",
-      id: string,
-      status: GameStatus,
-      owners: Array< string >,
-      initiator: string,
-      turn: string,
-      state: Array< Symbol | null >,
-      winner?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    },
-  } | null,
-};
-
-export type CreateGameMutationVariables = {
-  input: CreateGameInput,
-  condition?: ModelGameConditionInput | null,
-};
-
-export type CreateGameMutation = {
-  createGame?:  {
-    __typename: "Game",
-    id: string,
-    status: GameStatus,
-    owners: Array< string >,
-    initiator: string,
-    turn: string,
-    state: Array< Symbol | null >,
-    winner?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    players?:  {
-      __typename: "ModelPlayerGameConnection",
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type UpdateGameMutationVariables = {
-  input: UpdateGameInput,
-  condition?: ModelGameConditionInput | null,
-};
-
-export type UpdateGameMutation = {
-  updateGame?:  {
-    __typename: "Game",
-    id: string,
-    status: GameStatus,
-    owners: Array< string >,
-    initiator: string,
-    turn: string,
-    state: Array< Symbol | null >,
-    winner?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    players?:  {
-      __typename: "ModelPlayerGameConnection",
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type DeleteGameMutationVariables = {
-  input: DeleteGameInput,
-  condition?: ModelGameConditionInput | null,
-};
-
-export type DeleteGameMutation = {
-  deleteGame?:  {
-    __typename: "Game",
-    id: string,
-    status: GameStatus,
-    owners: Array< string >,
-    initiator: string,
-    turn: string,
-    state: Array< Symbol | null >,
-    winner?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    players?:  {
-      __typename: "ModelPlayerGameConnection",
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type CreateExpoTokenMutationVariables = {
-  input: CreateExpoTokenInput,
-  condition?: ModelExpoTokenConditionInput | null,
-};
-
-export type CreateExpoTokenMutation = {
-  createExpoToken?:  {
-    __typename: "ExpoToken",
-    id: string,
-    token: string,
-    playerUsername: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateExpoTokenMutationVariables = {
-  input: UpdateExpoTokenInput,
-  condition?: ModelExpoTokenConditionInput | null,
-};
-
-export type UpdateExpoTokenMutation = {
-  updateExpoToken?:  {
-    __typename: "ExpoToken",
-    id: string,
-    token: string,
-    playerUsername: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteExpoTokenMutationVariables = {
-  input: DeleteExpoTokenInput,
-  condition?: ModelExpoTokenConditionInput | null,
-};
-
-export type DeleteExpoTokenMutation = {
-  deleteExpoToken?:  {
-    __typename: "ExpoToken",
-    id: string,
-    token: string,
-    playerUsername: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type CreateExpoTicketsObjectMutationVariables = {
-  input: CreateExpoTicketsObjectInput,
-  condition?: ModelExpoTicketsObjectConditionInput | null,
-};
-
-export type CreateExpoTicketsObjectMutation = {
-  createExpoTicketsObject?:  {
-    __typename: "ExpoTicketsObject",
-    id: string,
-    tickets: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateExpoTicketsObjectMutationVariables = {
-  input: UpdateExpoTicketsObjectInput,
-  condition?: ModelExpoTicketsObjectConditionInput | null,
-};
-
-export type UpdateExpoTicketsObjectMutation = {
-  updateExpoTicketsObject?:  {
-    __typename: "ExpoTicketsObject",
-    id: string,
-    tickets: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteExpoTicketsObjectMutationVariables = {
-  input: DeleteExpoTicketsObjectInput,
-  condition?: ModelExpoTicketsObjectConditionInput | null,
-};
-
-export type DeleteExpoTicketsObjectMutation = {
-  deleteExpoTicketsObject?:  {
-    __typename: "ExpoTicketsObject",
-    id: string,
-    tickets: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
 export type GetPlayerQueryVariables = {
   username: string,
+  limit?: number | null,
+  nextToken?: string | null,
+  sortDirection?: ModelSortDirection | null,
 };
 
 export type GetPlayerQuery = {
   getPlayer?:  {
     __typename: "Player",
     id: string,
-    cognitoID: string,
-    username: string,
-    name: string,
-    email: string,
-    createdAt: string,
-    updatedAt: string,
     games?:  {
       __typename: "ModelPlayerGameConnection",
-      nextToken?: string | null,
-    } | null,
-    tokens?:  {
-      __typename: "ModelExpoTokenConnection",
+      items:  Array< {
+        __typename: "PlayerGame",
+        game:  {
+          __typename: "Game",
+          id: string,
+          initiator: string,
+          owners: Array< string >,
+          status: GameStatus,
+          turn: string,
+          winner?: string | null,
+          players?:  {
+            __typename: "ModelPlayerGameConnection",
+            items:  Array< {
+              __typename: "PlayerGame",
+              player:  {
+                __typename: "Player",
+                name: string,
+                username: string,
+              },
+            } | null >,
+          } | null,
+        },
+      } | null >,
       nextToken?: string | null,
     } | null,
   } | null,
 };
 
-export type ListPlayersQueryVariables = {
-  username?: string | null,
-  filter?: ModelPlayerFilterInput | null,
+export type searchPlayersQueryVariables = {
   limit?: number | null,
   nextToken?: string | null,
-  sortDirection?: ModelSortDirection | null,
+  searchString?: string | null,
 };
 
-export type ListPlayersQuery = {
-  listPlayers?:  {
-    __typename: "ModelPlayerConnection",
-    items:  Array< {
-      __typename: "Player",
-      id: string,
-      cognitoID: string,
-      username: string,
-      name: string,
-      email: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type SearchPlayersQueryVariables = {
-  filter?: SearchablePlayerFilterInput | null,
-  sort?: SearchablePlayerSortInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  from?: number | null,
-};
-
-export type SearchPlayersQuery = {
+export type searchPlayersQuery = {
   searchPlayers?:  {
     __typename: "SearchablePlayerConnection",
     items:  Array< {
       __typename: "Player",
-      id: string,
-      cognitoID: string,
-      username: string,
       name: string,
-      email: string,
-      createdAt: string,
-      updatedAt: string,
+      username: string,
     } | null >,
     nextToken?: string | null,
-    total?: number | null,
-  } | null,
-};
-
-export type GetGameQueryVariables = {
-  id: string,
-};
-
-export type GetGameQuery = {
-  getGame?:  {
-    __typename: "Game",
-    id: string,
-    status: GameStatus,
-    owners: Array< string >,
-    initiator: string,
-    turn: string,
-    state: Array< Symbol | null >,
-    winner?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    players?:  {
-      __typename: "ModelPlayerGameConnection",
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type ListGamesQueryVariables = {
-  filter?: ModelGameFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListGamesQuery = {
-  listGames?:  {
-    __typename: "ModelGameConnection",
-    items:  Array< {
-      __typename: "Game",
-      id: string,
-      status: GameStatus,
-      owners: Array< string >,
-      initiator: string,
-      turn: string,
-      state: Array< Symbol | null >,
-      winner?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetExpoTokenQueryVariables = {
-  token: string,
-};
-
-export type GetExpoTokenQuery = {
-  getExpoToken?:  {
-    __typename: "ExpoToken",
-    id: string,
-    token: string,
-    playerUsername: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListExpoTokensQueryVariables = {
-  token?: string | null,
-  filter?: ModelExpoTokenFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  sortDirection?: ModelSortDirection | null,
-};
-
-export type ListExpoTokensQuery = {
-  listExpoTokens?:  {
-    __typename: "ModelExpoTokenConnection",
-    items:  Array< {
-      __typename: "ExpoToken",
-      id: string,
-      token: string,
-      playerUsername: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetExpoTicketsObjectQueryVariables = {
-  id: string,
-};
-
-export type GetExpoTicketsObjectQuery = {
-  getExpoTicketsObject?:  {
-    __typename: "ExpoTicketsObject",
-    id: string,
-    tickets: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListExpoTicketsObjectsQueryVariables = {
-  filter?: ModelExpoTicketsObjectFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListExpoTicketsObjectsQuery = {
-  listExpoTicketsObjects?:  {
-    __typename: "ModelExpoTicketsObjectConnection",
-    items:  Array< {
-      __typename: "ExpoTicketsObject",
-      id: string,
-      tickets: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type OnUpdateGameByIdSubscriptionVariables = {
-  id: string,
-};
-
-export type OnUpdateGameByIdSubscription = {
-  onUpdateGameById?:  {
-    __typename: "Game",
-    id: string,
-    status: GameStatus,
-    owners: Array< string >,
-    initiator: string,
-    turn: string,
-    state: Array< Symbol | null >,
-    winner?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    players?:  {
-      __typename: "ModelPlayerGameConnection",
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type OnCreatePlayerSubscriptionVariables = {
-};
-
-export type OnCreatePlayerSubscription = {
-  onCreatePlayer?:  {
-    __typename: "Player",
-    id: string,
-    cognitoID: string,
-    username: string,
-    name: string,
-    email: string,
-    createdAt: string,
-    updatedAt: string,
-    games?:  {
-      __typename: "ModelPlayerGameConnection",
-      nextToken?: string | null,
-    } | null,
-    tokens?:  {
-      __typename: "ModelExpoTokenConnection",
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type OnUpdatePlayerSubscriptionVariables = {
-};
-
-export type OnUpdatePlayerSubscription = {
-  onUpdatePlayer?:  {
-    __typename: "Player",
-    id: string,
-    cognitoID: string,
-    username: string,
-    name: string,
-    email: string,
-    createdAt: string,
-    updatedAt: string,
-    games?:  {
-      __typename: "ModelPlayerGameConnection",
-      nextToken?: string | null,
-    } | null,
-    tokens?:  {
-      __typename: "ModelExpoTokenConnection",
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type OnDeletePlayerSubscriptionVariables = {
-};
-
-export type OnDeletePlayerSubscription = {
-  onDeletePlayer?:  {
-    __typename: "Player",
-    id: string,
-    cognitoID: string,
-    username: string,
-    name: string,
-    email: string,
-    createdAt: string,
-    updatedAt: string,
-    games?:  {
-      __typename: "ModelPlayerGameConnection",
-      nextToken?: string | null,
-    } | null,
-    tokens?:  {
-      __typename: "ModelExpoTokenConnection",
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type OnCreatePlayerGameSubscriptionVariables = {
-};
-
-export type OnCreatePlayerGameSubscription = {
-  onCreatePlayerGame?:  {
-    __typename: "PlayerGame",
-    id: string,
-    createdAt: string,
-    gameID: string,
-    playerUsername: string,
-    owners: Array< string >,
-    updatedAt: string,
-    player:  {
-      __typename: "Player",
-      id: string,
-      cognitoID: string,
-      username: string,
-      name: string,
-      email: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    game:  {
-      __typename: "Game",
-      id: string,
-      status: GameStatus,
-      owners: Array< string >,
-      initiator: string,
-      turn: string,
-      state: Array< Symbol | null >,
-      winner?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    },
-  } | null,
-};
-
-export type OnUpdatePlayerGameSubscriptionVariables = {
-};
-
-export type OnUpdatePlayerGameSubscription = {
-  onUpdatePlayerGame?:  {
-    __typename: "PlayerGame",
-    id: string,
-    createdAt: string,
-    gameID: string,
-    playerUsername: string,
-    owners: Array< string >,
-    updatedAt: string,
-    player:  {
-      __typename: "Player",
-      id: string,
-      cognitoID: string,
-      username: string,
-      name: string,
-      email: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    game:  {
-      __typename: "Game",
-      id: string,
-      status: GameStatus,
-      owners: Array< string >,
-      initiator: string,
-      turn: string,
-      state: Array< Symbol | null >,
-      winner?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    },
-  } | null,
-};
-
-export type OnDeletePlayerGameSubscriptionVariables = {
-};
-
-export type OnDeletePlayerGameSubscription = {
-  onDeletePlayerGame?:  {
-    __typename: "PlayerGame",
-    id: string,
-    createdAt: string,
-    gameID: string,
-    playerUsername: string,
-    owners: Array< string >,
-    updatedAt: string,
-    player:  {
-      __typename: "Player",
-      id: string,
-      cognitoID: string,
-      username: string,
-      name: string,
-      email: string,
-      createdAt: string,
-      updatedAt: string,
-    },
-    game:  {
-      __typename: "Game",
-      id: string,
-      status: GameStatus,
-      owners: Array< string >,
-      initiator: string,
-      turn: string,
-      state: Array< Symbol | null >,
-      winner?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    },
-  } | null,
-};
-
-export type OnCreateGameSubscriptionVariables = {
-  owners?: string | null,
-};
-
-export type OnCreateGameSubscription = {
-  onCreateGame?:  {
-    __typename: "Game",
-    id: string,
-    status: GameStatus,
-    owners: Array< string >,
-    initiator: string,
-    turn: string,
-    state: Array< Symbol | null >,
-    winner?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    players?:  {
-      __typename: "ModelPlayerGameConnection",
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type OnUpdateGameSubscriptionVariables = {
-  owners?: string | null,
-};
-
-export type OnUpdateGameSubscription = {
-  onUpdateGame?:  {
-    __typename: "Game",
-    id: string,
-    status: GameStatus,
-    owners: Array< string >,
-    initiator: string,
-    turn: string,
-    state: Array< Symbol | null >,
-    winner?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    players?:  {
-      __typename: "ModelPlayerGameConnection",
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type OnDeleteGameSubscriptionVariables = {
-  owners?: string | null,
-};
-
-export type OnDeleteGameSubscription = {
-  onDeleteGame?:  {
-    __typename: "Game",
-    id: string,
-    status: GameStatus,
-    owners: Array< string >,
-    initiator: string,
-    turn: string,
-    state: Array< Symbol | null >,
-    winner?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    players?:  {
-      __typename: "ModelPlayerGameConnection",
-      nextToken?: string | null,
-    } | null,
-  } | null,
-};
-
-export type OnCreateExpoTokenSubscriptionVariables = {
-  playerUsername?: string | null,
-};
-
-export type OnCreateExpoTokenSubscription = {
-  onCreateExpoToken?:  {
-    __typename: "ExpoToken",
-    id: string,
-    token: string,
-    playerUsername: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateExpoTokenSubscriptionVariables = {
-  playerUsername?: string | null,
-};
-
-export type OnUpdateExpoTokenSubscription = {
-  onUpdateExpoToken?:  {
-    __typename: "ExpoToken",
-    id: string,
-    token: string,
-    playerUsername: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteExpoTokenSubscriptionVariables = {
-  playerUsername?: string | null,
-};
-
-export type OnDeleteExpoTokenSubscription = {
-  onDeleteExpoToken?:  {
-    __typename: "ExpoToken",
-    id: string,
-    token: string,
-    playerUsername: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreateExpoTicketsObjectSubscriptionVariables = {
-};
-
-export type OnCreateExpoTicketsObjectSubscription = {
-  onCreateExpoTicketsObject?:  {
-    __typename: "ExpoTicketsObject",
-    id: string,
-    tickets: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateExpoTicketsObjectSubscriptionVariables = {
-};
-
-export type OnUpdateExpoTicketsObjectSubscription = {
-  onUpdateExpoTicketsObject?:  {
-    __typename: "ExpoTicketsObject",
-    id: string,
-    tickets: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteExpoTicketsObjectSubscriptionVariables = {
-};
-
-export type OnDeleteExpoTicketsObjectSubscription = {
-  onDeleteExpoTicketsObject?:  {
-    __typename: "ExpoTicketsObject",
-    id: string,
-    tickets: string,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };

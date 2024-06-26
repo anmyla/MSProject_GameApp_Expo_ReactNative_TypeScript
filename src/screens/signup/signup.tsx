@@ -11,7 +11,7 @@ import {
 } from "react-native";
 
 import styles from "./signup.styles";
-import { GradienBackground, TextInput, MyButton } from "../../components";
+import { GradientBackground, TextInput, MyButton } from "../../components";
 import { Auth } from "aws-amplify";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { StackNavigatorParams } from "../../config/navigator";
@@ -96,7 +96,7 @@ export default function SignUp({ navigation }: SignUpProps): ReactElement {
   };
 
   return (
-    <GradienBackground>
+    <GradientBackground>
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={styles.container}>
           {step === "OTP" && (
@@ -199,6 +199,6 @@ export default function SignUp({ navigation }: SignUpProps): ReactElement {
           )}
         </ScrollView>
       </KeyboardAvoidingView>
-    </GradienBackground>
+    </GradientBackground>
   );
 }

@@ -8,6 +8,9 @@ export type BoardProps = {
     disabled? : boolean;
     state: BoardState;
     onPlay: (square: number) => void;
+    size?: number;
+    gameResult?: BoardResult | false;
+    loading?: Moves | false;
 }
 
 export type Square = string | null;
