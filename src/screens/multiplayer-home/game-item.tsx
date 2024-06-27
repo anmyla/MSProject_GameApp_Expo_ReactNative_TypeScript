@@ -26,7 +26,7 @@ export default function GameItem({
         const game = playerGame.game;
         if (game.status !== "FINISHED") return false;
         const opponent = game?.players?.items?.find(
-            playerGame => playerGame?.player.username !== user.username
+            (            playerGame: { player: { username: any; }; }) => playerGame?.player.username !== user.username
         );
         if (game.winner === user.username) return "win";
         if (game.winner === opponent?.player.username) return "loss";
@@ -38,7 +38,7 @@ export default function GameItem({
     const game = playerGame?.game;
     const result = getResult(playerGame);
     const opponent = game?.players?.items?.find(
-        playerGame => playerGame?.player.username !== user.username
+        (        playerGame: { player: { username: any; }; }) => playerGame?.player.username !== user.username
     );
 
     useEffect(() => {
@@ -111,11 +111,12 @@ export default function GameItem({
                 </MyText>
             )}
             {result && (
-                <MyText style={{ color: "#2a0080"[result], textAlign: "center" }}>
-                    {result === "win" && "You Won!"}
-                    {result === "loss" && "You Lost!"}
-                    {result === "draw" && "It's a draw!"}
-                </MyText>
+                <MyText style={{ color: result === "win" ? "#2a0080" : result === "loss" ? "#ff0000" : "#000000", textAlign: "center" }}>
+                {result === "win" && "You Won!"}
+                {result === "loss" && "You Lost!"}
+                {result === "draw" && "It's a draw!"}
+              </MyText>
+              
             )}
         </TouchableOpacity>
     );

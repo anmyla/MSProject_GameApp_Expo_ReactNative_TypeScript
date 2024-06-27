@@ -40,20 +40,6 @@ export const playMove = /* GraphQL */ `mutation PlayMove($game: ID!, $index: Int
   APITypes.PlayMoveMutationVariables,
   APITypes.PlayMoveMutation
 >;
-export const addExpoToken = /* GraphQL */ `mutation AddExpoToken($token: String!) {
-  addExpoToken(token: $token) {
-    id
-    token
-    playerUsername
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.AddExpoTokenMutationVariables,
-  APITypes.AddExpoTokenMutation
->;
 export const createGameData = /* GraphQL */ `mutation CreateGameData(
   $input: CreateGameDataInput!
   $condition: ModelGameDataConditionInput

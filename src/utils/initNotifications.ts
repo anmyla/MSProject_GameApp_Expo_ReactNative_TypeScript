@@ -1,6 +1,6 @@
 import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
-import { Platform } from "react-native";
+import { Alert, Platform } from "react-native";
 import gql from "graphql-tag";
 import { API, graphqlOperation } from "aws-amplify";
 
@@ -34,8 +34,8 @@ const initNotifications = async (): Promise<void> => {
                 })
             );
         } catch (error) {
-            console.log(error);
-            //report
+            const typedError = error as Error;
+            Alert.alert("Error in processing notifications", typedError.message)
         }
 
         if (Platform.OS === "android") {

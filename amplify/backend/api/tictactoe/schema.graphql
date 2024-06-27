@@ -8,9 +8,9 @@ type Mutation {
     @function(name: "playMove-${env}")
     @aws_cognito_user_pools
 
-  addExpoToken(token: String!): ExpoToken
-    @function(name: "addExpoToken-${env}")
-    @aws_cognito_user_pools
+ # addExpoToken(token: String!): ExpoToken
+ #   @function(name: "addExpoToken-${env}")
+ #   @aws_cognito_user_pools
 }
 
 type Subscription {
@@ -23,8 +23,16 @@ type GameData
   @model
   @auth(
     rules: [
-      { allow: owner, ownerField: "owners", operations: [read, create, update, delete] }
-      { allow: groups, groups: ["Admin"], operations: [read, create, update, delete] }
+      {
+        allow: owner
+        ownerField: "owners"
+        operations: [read, create, update, delete]
+      }
+      {
+        allow: groups
+        groups: ["Admin"]
+        operations: [read, create, update, delete]
+      }
       { allow: private, operations: [read] }
     ]
   ) {
@@ -35,10 +43,9 @@ type GameData
   winner: String
 }
 
-
 type Player
   @model
-  @searchable
+ # @searchable
   @key(fields: ["username"])
   @auth(
     rules: [
@@ -49,6 +56,7 @@ type Player
         provider: iam
         operations: [read, create, update, delete]
       }
+      { allow: groups, groups: ["Admin"], operations: [read] }
     ]
   ) {
   id: ID!
@@ -72,6 +80,7 @@ type PlayerGame
         provider: iam
         operations: [read, create, update, delete]
       }
+      { allow: groups, groups: ["Admin"], operations: [read] }
     ]
   ) {
   id: ID!
@@ -88,6 +97,7 @@ type Game
   @auth(
     rules: [
       { allow: owner, ownerField: "owners", operations: [read] }
+      { allow: groups, groups: ["Admin"], operations: [read] }
       {
         allow: private
         provider: iam
