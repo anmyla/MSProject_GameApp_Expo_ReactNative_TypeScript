@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet } from "react-native";
 import { AppBootStrap } from "./components";
 import Navigator from "./config/navigator";
 import { SettingsProvider } from "./contexts/settings-context";
