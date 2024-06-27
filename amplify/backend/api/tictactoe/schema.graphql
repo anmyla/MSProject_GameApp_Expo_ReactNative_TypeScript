@@ -19,13 +19,22 @@ type Subscription {
     @aws_cognito_user_pools
 }
 
-type GameData {
+type GameData
+  @model
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "owners", operations: [read, create, update, delete] }
+      { allow: groups, groups: ["Admin"], operations: [read, create, update, delete] }
+      { allow: private, operations: [read] }
+    ]
+  ) {
   id: ID!
   status: GameStatus!
   turn: String!
   state: [Symbol]!
   winner: String
 }
+
 
 type Player
   @model

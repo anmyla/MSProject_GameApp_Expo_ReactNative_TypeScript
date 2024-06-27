@@ -84,6 +84,8 @@ export type GameData = {
   turn: string,
   state: Array< Symbol | null >,
   winner?: string | null,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export enum ModelSortDirection {

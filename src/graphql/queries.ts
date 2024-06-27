@@ -8,6 +8,46 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
+export const getGameData = /* GraphQL */ `query GetGameData($id: ID!) {
+  getGameData(id: $id) {
+    id
+    status
+    turn
+    state
+    winner
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetGameDataQueryVariables,
+  APITypes.GetGameDataQuery
+>;
+export const listGameDatas = /* GraphQL */ `query ListGameDatas(
+  $filter: ModelGameDataFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listGameDatas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      status
+      turn
+      state
+      winner
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListGameDatasQueryVariables,
+  APITypes.ListGameDatasQuery
+>;
 export const getPlayer = /* GraphQL */ `query GetPlayer($username: String!) {
   getPlayer(username: $username) {
     id

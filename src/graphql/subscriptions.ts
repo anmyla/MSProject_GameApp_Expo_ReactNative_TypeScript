@@ -30,6 +30,54 @@ export const onUpdateGameById = /* GraphQL */ `subscription OnUpdateGameById($id
   APITypes.OnUpdateGameByIdSubscriptionVariables,
   APITypes.OnUpdateGameByIdSubscription
 >;
+export const onCreateGameData = /* GraphQL */ `subscription OnCreateGameData {
+  onCreateGameData {
+    id
+    status
+    turn
+    state
+    winner
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateGameDataSubscriptionVariables,
+  APITypes.OnCreateGameDataSubscription
+>;
+export const onUpdateGameData = /* GraphQL */ `subscription OnUpdateGameData {
+  onUpdateGameData {
+    id
+    status
+    turn
+    state
+    winner
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateGameDataSubscriptionVariables,
+  APITypes.OnUpdateGameDataSubscription
+>;
+export const onDeleteGameData = /* GraphQL */ `subscription OnDeleteGameData {
+  onDeleteGameData {
+    id
+    status
+    turn
+    state
+    winner
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteGameDataSubscriptionVariables,
+  APITypes.OnDeleteGameDataSubscription
+>;
 export const onCreatePlayer = /* GraphQL */ `subscription OnCreatePlayer {
   onCreatePlayer {
     id
