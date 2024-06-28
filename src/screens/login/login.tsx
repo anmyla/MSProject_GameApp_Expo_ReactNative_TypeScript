@@ -60,7 +60,7 @@ const login = async () => {
       const errorMessage =
         (error as Error).message ||
         "An unknown error while signing in has occurred";
-      Alert.alert("An error has occured! ", errorMessage);
+      Alert.alert("An error has occured while logging in! ", errorMessage);
     }
     setLoading(false);
   };

@@ -1,5 +1,5 @@
 const getErrorMessage = (error: { [key: string]: any }): string => {
-    const defaultError = "An error has occurred!";
+    const defaultError = "An error has occurred (default)!";
     if (error.errors && error.errors.length > 0) {
         return error.errors[0].message || defaultError;
     }

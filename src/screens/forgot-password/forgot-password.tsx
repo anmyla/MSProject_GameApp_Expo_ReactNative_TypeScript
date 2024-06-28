@@ -43,7 +43,7 @@ export default function ForgotPassword({ navigation }: ForgotPasswordProps): Rea
             setStep("2");
         } catch (error) {
             const typedError = error as Error;
-            Alert.alert("Error!", typedError.message || "An error has occurred!");
+            Alert.alert("Error!", typedError.message || "An error has occurred in retrieving forgotten password!");
         }
         setLoading(false);
     };
@@ -57,7 +57,7 @@ export default function ForgotPassword({ navigation }: ForgotPasswordProps): Rea
             navigation.navigate("Login");
         } catch (error) {
             const typedError = error as Error;
-            Alert.alert("Error!", typedError.message || "An error has occurred!");
+            Alert.alert("Error!", typedError.message || "An error has occurred in submitting new password!");
         }
         setLoading(false);
     };

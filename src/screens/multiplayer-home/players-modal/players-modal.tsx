@@ -42,7 +42,7 @@ export default function PlayersModal({ onItemPress }: PlayersModalProps): ReactE
                 setPlayers(playersResult.data.searchPlayers.items);
             }
         } catch (error) {
-            Alert.alert("Error!", "An error has occurred. Please try again later!");
+            Alert.alert("Error!", "An error has occurred in fetching players. Please try again later!");
         }
         setLoading(false);
     };

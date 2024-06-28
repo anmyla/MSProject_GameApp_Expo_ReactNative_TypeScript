@@ -58,7 +58,7 @@ export default function SignUp({ navigation }: SignUpProps): ReactElement {
       const errorMessage =
         (error as Error).message ||
         "An unknown error while signing in has occurred";
-      Alert.alert("An error has occured! ", errorMessage);
+      Alert.alert("An error has occured in signing up! ", errorMessage);
     }
     setLoading(false);
   };
@@ -74,7 +74,7 @@ export default function SignUp({ navigation }: SignUpProps): ReactElement {
       const errorMessage =
         (error as Error).message ||
         "An unknown error while auth confirmation has occurred";
-      Alert.alert("An error has occured! ", errorMessage);
+      Alert.alert("An error has occured in confirming code! ", errorMessage);
     }
     setAuthConfriming(false);
   };
@@ -90,7 +90,7 @@ export default function SignUp({ navigation }: SignUpProps): ReactElement {
       const errorMessage =
         (error as Error).message ||
         "An unknown error while auth confirmation has occurred";
-      Alert.alert("An error has occured! ", errorMessage);
+      Alert.alert("An error has occured in resending code! ", errorMessage);
     }
     setAuthResending(false);
   };

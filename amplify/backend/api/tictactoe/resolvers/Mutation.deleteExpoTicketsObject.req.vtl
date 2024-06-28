@@ -13,8 +13,7 @@
   #if( $modelObjectKey )
     #set( $condition = {
   "expression": "",
-  "expressionNames": {},
-  "expressionValues": {}
+  "expressionNames": {}
 } )
     #foreach( $entry in $modelObjectKey.entrySet() )
       #if( $velocityCount == 1 )
@@ -29,8 +28,7 @@
   "expression": "attribute_exists(#id)",
   "expressionNames": {
       "#id": "id"
-  },
-  "expressionValues": {}
+  }
 } )
   #end
 #end

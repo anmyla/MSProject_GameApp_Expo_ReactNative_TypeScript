@@ -9,9 +9,9 @@ type MyTextProps = {
 const MyText = ({ children, style, weight = "700", ...props }: MyTextProps): ReactElement => {
     let fontFamily;
     if (weight === "400") {
-        fontFamily = "DeliusUnicase_400Regular";
+        fontFamily = "DeliusUnicase-Regular";
     } else if (weight === "700") {
-        fontFamily = "DeliusUnicase_700Bold";
+        fontFamily = "DeliusUnicase-Bold";
     }
     return (
         <Text {...props} style={[{ fontFamily }, style]}>

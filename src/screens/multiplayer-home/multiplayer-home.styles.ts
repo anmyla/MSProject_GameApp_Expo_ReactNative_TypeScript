@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         paddingBottom: 30
     },
     newGameButtonText: {
-        color: '#f2f2f2',
+        color: '#000000',
         textAlign: "center",
         fontSize: 17
     },

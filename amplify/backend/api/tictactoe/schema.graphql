@@ -48,7 +48,7 @@ type Player
   @key(fields: ["username"])
   @auth(
     rules: [
-      { allow: private, operations: [read] }
+      { allow: private, operations: [read, update] }
       { allow: owner, ownerField: "username", operations: [update] }
       {
         allow: private
@@ -66,6 +66,7 @@ type Player
   games: [PlayerGame] @connection(keyName: "byPlayer", fields: ["username"])
   tokens: [ExpoToken] @connection(keyName: "byPlayer", fields: ["username"])
 }
+
 
 type PlayerGame
   @model(queries: null)
@@ -160,3 +161,4 @@ type ExpoTicketsObject
   id: ID!
   tickets: AWSJSON!
 }
+

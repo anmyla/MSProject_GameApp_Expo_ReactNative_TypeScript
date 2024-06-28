@@ -11,7 +11,7 @@ import { useFonts } from "expo-font";
 import { Auth, Hub } from "aws-amplify";
 import { useAuth } from "../../contexts/auth-context";
 import * as Notifications from "expo-notifications";
-import { initNotifications } from "../../utils"
+import { initNotifications } from "../../utils";
 
 
 Notifications.setNotificationHandler({
