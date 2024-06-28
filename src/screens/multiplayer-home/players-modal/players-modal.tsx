@@ -14,15 +14,14 @@ import { searchPlayersQuery } from "../../../API";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import styles from "./players-modal.styles";
 
-
-type PlayersListType = Exclude<searchPlayersQuery["searchPlayers"], null>["items"];
+type PlayersListType = NonNullable<NonNullable<searchPlayersQuery["searchPlayers"]>["items"]>;
 
 type PlayersModalProps = {
     onItemPress: (username: string) => void;
 };
 
 export default function PlayersModal({ onItemPress }: PlayersModalProps): ReactElement {
-    const [players, setPlayers] = useState<PlayersListType>(null);
+    const [players, setPlayers] = useState<PlayersListType>([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [submittedQuery, setSubmittedQuery] = useState("");
     const [loading, setLoading] = useState(false);
@@ -33,14 +32,14 @@ export default function PlayersModal({ onItemPress }: PlayersModalProps): ReactE
         setLoading(true);
         setSubmittedQuery(searchString);
         try {
-            const players = (await API.graphql(
+            const playersResult = (await API.graphql(
                 graphqlOperation(searchPlayers, {
                     limit: 10,
                     searchString
                 })
             )) as GraphQLResult<searchPlayersQuery>;
-            if (players.data?.searchPlayers) {
-                setPlayers(players.data.searchPlayers.items);
+            if (playersResult.data?.searchPlayers) {
+                setPlayers(playersResult.data.searchPlayers.items);
             }
         } catch (error) {
             Alert.alert("Error!", "An error has occurred. Please try again later!");
@@ -84,7 +83,7 @@ export default function PlayersModal({ onItemPress }: PlayersModalProps): ReactE
                                     <TouchableOpacity
                                         onPress={() => {
                                             if (item) {
-                                                onItemPress(item?.username);
+                                                onItemPress(item.username);
                                             }
                                         }}
                                         style={styles.playerItem}

@@ -9,6 +9,7 @@ import React, {
     SetStateAction,
     useContext,
   } from "react";
+import { View } from "react-native";
 
 
 type AuthContextType = {
@@ -29,9 +30,12 @@ function useAuth() : AuthContextType {
 const AuthProvider = (props: {children: ReactNode}): ReactElement => {
     const [user, setUser] = useState<{ [key: string]: any } | null>(null);
 
-    return (<AuthContext.Provider 
+    return (
+    <AuthContext.Provider  
        {...props}
-        value ={{user, setUser}} />)
+        value ={{user, setUser}} 
+        />
+    )
 }
 
 export {AuthProvider, useAuth};

@@ -56,9 +56,8 @@ export const searchPlayers = gql`
     }
 `;
 
-export type PlayerGamesType = Exclude<
-    Exclude<GetPlayerQuery["getPlayer"], null>["games"],
-    null
+export type PlayerGamesType = NonNullable<
+    NonNullable<GetPlayerQuery["getPlayer"]>["games"]
 >["items"];
 
-export type PlayerGameType = Exclude<PlayerGamesType, null>[0];
+export type PlayerGameType = NonNullable<PlayerGamesType>[0];

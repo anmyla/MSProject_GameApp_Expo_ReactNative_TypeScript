@@ -21,7 +21,7 @@
       "function": {
         "postConfirmation": {
           "deploymentBucketName": "amplify-tictactoe-second-0425a-deployment",
-          "s3Key": "amplify-builds/postConfirmation-675a79672f6562686463-build.zip"
+          "s3Key": "amplify-builds/postConfirmation-2b626d306962786e7979-build.zip"
         },
         "postConfirmationFunction": {},
         "preAuthentication": {
@@ -30,7 +30,7 @@
         },
         "startGame": {
           "deploymentBucketName": "amplify-tictactoe-second-0425a-deployment",
-          "s3Key": "amplify-builds/startGame-49502b64533662697937-build.zip"
+          "s3Key": "amplify-builds/startGame-55423649672f38394230-build.zip"
         },
         "playMove": {
           "deploymentBucketName": "amplify-tictactoe-second-0425a-deployment",
