@@ -40,7 +40,10 @@
           "deploymentBucketName": "amplify-tictactoe-second-0425a-deployment",
           "s3Key": "amplify-builds/addExpoToken-62555137656a454f6a4e-build.zip"
         },
-        "handleExpoTickets": {}
+        "handleExpoTickets": {
+          "deploymentBucketName": "amplify-tictactoe-second-0425a-deployment",
+          "s3Key": "amplify-builds/handleExpoTickets-36364b4a59754869466a-build.zip"
+        }
       }
     }
   },

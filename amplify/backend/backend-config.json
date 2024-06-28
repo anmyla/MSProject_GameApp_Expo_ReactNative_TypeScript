@@ -171,6 +171,22 @@
         }
       ]
     },
+    "AMPLIFY_function_handleExpoTickets_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleExpoTickets"
+        }
+      ]
+    },
+    "AMPLIFY_function_handleExpoTickets_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "handleExpoTickets"
+        }
+      ]
+    },
     "AMPLIFY_function_playMove_deploymentBucketName": {
       "usedBy": [
         {
