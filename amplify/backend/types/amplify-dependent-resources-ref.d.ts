@@ -24,6 +24,14 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "handleExpoTickets": {
+      "Arn": "string",
+      "CloudWatchEventRule": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "playMove": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
