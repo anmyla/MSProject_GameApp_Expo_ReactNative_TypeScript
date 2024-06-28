@@ -2,7 +2,7 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from "../API";
+import * as APITypes from "../../amplify/backend/function/addExpoToken/src/src/API";
 type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationInput: InputType;
   __generatedMutationOutput: OutputType;
@@ -39,6 +39,20 @@ export const playMove = /* GraphQL */ `mutation PlayMove($game: ID!, $index: Int
 ` as GeneratedMutation<
   APITypes.PlayMoveMutationVariables,
   APITypes.PlayMoveMutation
+>;
+export const addExpoToken = /* GraphQL */ `mutation AddExpoToken($token: String!) {
+  addExpoToken(token: $token) {
+    id
+    token
+    playerUsername
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.AddExpoTokenMutationVariables,
+  APITypes.AddExpoTokenMutation
 >;
 export const createGameData = /* GraphQL */ `mutation CreateGameData(
   $input: CreateGameDataInput!

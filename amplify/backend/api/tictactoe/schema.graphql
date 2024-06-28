@@ -8,9 +8,9 @@ type Mutation {
     @function(name: "playMove-${env}")
     @aws_cognito_user_pools
 
- # addExpoToken(token: String!): ExpoToken
- #   @function(name: "addExpoToken-${env}")
- #   @aws_cognito_user_pools
+  addExpoToken(token: String!): ExpoToken
+    @function(name: "addExpoToken-${env}")
+    @aws_cognito_user_pools
 }
 
 type Subscription {
@@ -45,7 +45,7 @@ type GameData
 
 type Player
   @model
- # @searchable
+  @searchable
   @key(fields: ["username"])
   @auth(
     rules: [

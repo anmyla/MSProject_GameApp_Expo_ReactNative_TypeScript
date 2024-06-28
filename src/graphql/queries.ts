@@ -2,7 +2,7 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from "../API";
+import * as APITypes from "../../amplify/backend/function/addExpoToken/src/src/API";
 type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryInput: InputType;
   __generatedQueryOutput: OutputType;
@@ -100,6 +100,39 @@ export const listPlayers = /* GraphQL */ `query ListPlayers(
 ` as GeneratedQuery<
   APITypes.ListPlayersQueryVariables,
   APITypes.ListPlayersQuery
+>;
+export const searchPlayers = /* GraphQL */ `query SearchPlayers(
+  $filter: SearchablePlayerFilterInput
+  $sort: SearchablePlayerSortInput
+  $limit: Int
+  $nextToken: String
+  $from: Int
+) {
+  searchPlayers(
+    filter: $filter
+    sort: $sort
+    limit: $limit
+    nextToken: $nextToken
+    from: $from
+  ) {
+    items {
+      id
+      cognitoID
+      username
+      name
+      email
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    total
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.SearchPlayersQueryVariables,
+  APITypes.SearchPlayersQuery
 >;
 export const getGame = /* GraphQL */ `query GetGame($id: ID!) {
   getGame(id: $id) {

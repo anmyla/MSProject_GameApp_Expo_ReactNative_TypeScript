@@ -139,6 +139,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_addExpoToken_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addExpoToken"
+        }
+      ]
+    },
+    "AMPLIFY_function_addExpoToken_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addExpoToken"
+        }
+      ]
+    },
     "AMPLIFY_function_playMove_deploymentBucketName": {
       "usedBy": [
         {
