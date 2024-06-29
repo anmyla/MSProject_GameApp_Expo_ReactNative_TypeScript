@@ -61,39 +61,6 @@ export const listPlayers = /* GraphQL */ `query ListPlayers(
   APITypes.ListPlayersQueryVariables,
   APITypes.ListPlayersQuery
 >;
-export const searchPlayers = /* GraphQL */ `query SearchPlayers(
-  $filter: SearchablePlayerFilterInput
-  $sort: SearchablePlayerSortInput
-  $limit: Int
-  $nextToken: String
-  $from: Int
-) {
-  searchPlayers(
-    filter: $filter
-    sort: $sort
-    limit: $limit
-    nextToken: $nextToken
-    from: $from
-  ) {
-    items {
-      id
-      cognitoID
-      username
-      name
-      email
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    total
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.SearchPlayersQueryVariables,
-  APITypes.SearchPlayersQuery
->;
 export const getGame = /* GraphQL */ `query GetGame($id: ID!) {
   getGame(id: $id) {
     id

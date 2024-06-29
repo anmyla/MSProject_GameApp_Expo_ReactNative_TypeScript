@@ -39,7 +39,10 @@
     },
     "graphqltransformer": {
       "securityEnhancementNotification": false,
-      "showFieldAuthNotification": false
+      "showFieldAuthNotification": false,
+      "addmissingownerfields": true,
+      "validatetypenamereservedwords": true,
+      "useexperimentalpipelinedtransformer": false
     }
   },
   "debug": {

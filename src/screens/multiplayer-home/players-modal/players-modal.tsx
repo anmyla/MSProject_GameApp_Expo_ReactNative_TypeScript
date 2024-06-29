@@ -14,9 +14,10 @@ import { GraphQLResult } from "@aws-amplify/api";
 import { searchPlayersQuery } from "../../../API";
 import styles from "./players-modal.styles";
 
-type PlayersListType = NonNullable<
-  NonNullable<searchPlayersQuery["searchPlayers"]>["items"]
->;
+export type PlayersListType = Exclude<
+  searchPlayersQuery["searchPlayers"],
+  null
+>["items"];
 
 type PlayersModalProps = {
   onItemPress: (username: string) => void;
