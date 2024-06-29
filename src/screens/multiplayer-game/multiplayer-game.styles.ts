@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     },
     modal: {
         position: "absolute",
-        backgroundColor: "#2a0080",
+        backgroundColor: "#CDB1D1",
         bottom: 40,
         left: 30,
         right: 30,
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         borderColor: "#e6e6ff"
     },
     modalText: {
-        color: "#e6e6ff",
+        color: "#f2f2f2",
         fontSize: 28,
         textAlign: "center",
         marginBottom: 30
@@ -35,10 +35,10 @@ const styles = StyleSheet.create({
         marginBottom: 80
     },
     playerName: {
-        color: "#2a0080",
+        color: "#CDB1D1",
     },
     playerUsername: {
-        color: "#2a0080",
+        color: "#CDB1D1",
         fontSize: 12
     },
     player: {

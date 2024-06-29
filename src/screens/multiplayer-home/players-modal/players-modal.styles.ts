@@ -10,12 +10,12 @@ const styles = StyleSheet.create({
     },
     searchContainer: {
         padding: 20,
-        backgroundColor: "#2a0080"
+        backgroundColor: "#AFA1B2"
     },
     playerItem: {
-        backgroundColor: "#2a0080",
+        backgroundColor: "#AFA1B2",
         borderTopWidth: 1,
-        borderColor: "#2a0080",
+        borderColor: "#f2f2f2",
         padding: 15,
         marginBottom: 20
     }

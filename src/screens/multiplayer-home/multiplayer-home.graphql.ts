@@ -55,6 +55,7 @@ export const searchPlayers = gql`
         }
     }
 `;
+
 export type PlayerGamesType = Exclude<
     Exclude<GetPlayerQuery["getPlayer"], null>["games"],
     null

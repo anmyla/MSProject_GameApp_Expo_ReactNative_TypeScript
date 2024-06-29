@@ -15,8 +15,6 @@ export const startGame = /* GraphQL */ `mutation StartGame($invitee: String!) {
     turn
     state
     winner
-    createdAt
-    updatedAt
     __typename
   }
 }
@@ -31,8 +29,6 @@ export const playMove = /* GraphQL */ `mutation PlayMove($game: ID!, $index: Int
     turn
     state
     winner
-    createdAt
-    updatedAt
     __typename
   }
 }
@@ -53,63 +49,6 @@ export const addExpoToken = /* GraphQL */ `mutation AddExpoToken($token: String!
 ` as GeneratedMutation<
   APITypes.AddExpoTokenMutationVariables,
   APITypes.AddExpoTokenMutation
->;
-export const createGameData = /* GraphQL */ `mutation CreateGameData(
-  $input: CreateGameDataInput!
-  $condition: ModelGameDataConditionInput
-) {
-  createGameData(input: $input, condition: $condition) {
-    id
-    status
-    turn
-    state
-    winner
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.CreateGameDataMutationVariables,
-  APITypes.CreateGameDataMutation
->;
-export const updateGameData = /* GraphQL */ `mutation UpdateGameData(
-  $input: UpdateGameDataInput!
-  $condition: ModelGameDataConditionInput
-) {
-  updateGameData(input: $input, condition: $condition) {
-    id
-    status
-    turn
-    state
-    winner
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.UpdateGameDataMutationVariables,
-  APITypes.UpdateGameDataMutation
->;
-export const deleteGameData = /* GraphQL */ `mutation DeleteGameData(
-  $input: DeleteGameDataInput!
-  $condition: ModelGameDataConditionInput
-) {
-  deleteGameData(input: $input, condition: $condition) {
-    id
-    status
-    turn
-    state
-    winner
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.DeleteGameDataMutationVariables,
-  APITypes.DeleteGameDataMutation
 >;
 export const createPlayer = /* GraphQL */ `mutation CreatePlayer(
   $input: CreatePlayerInput!
