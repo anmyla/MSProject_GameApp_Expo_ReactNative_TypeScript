@@ -7,13 +7,14 @@ import { BoardProps, calculateWinner, isTerminal } from "../../utils";
 export default function Board({
   state,
   onPlay,
+  disabled
 }: BoardProps) {
   const gameResult = isTerminal(state);
   const winner = gameResult ? gameResult.winner : null;
   const winningSquares = gameResult && gameResult.line ? gameResult.line : [];
 
   function handleClick(i: number) {
-    if (calculateWinner(state) || state[i]) {
+    if (disabled || calculateWinner(state) || state[i]) {
       return;
     }
     onPlay(i);

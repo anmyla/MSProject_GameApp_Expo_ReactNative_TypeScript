@@ -21,6 +21,7 @@ import {
 } from "../screens";
 import { useAuth } from "../contexts/auth-context";
 import * as Notifications from "expo-notifications";
+import DummyMP from "../screens/dummy-mp/dmp-components/dummy-mp";
 
 export type StackNavigatorParams = {
   Home: undefined;
@@ -34,6 +35,7 @@ export type StackNavigatorParams = {
   MultiplayerGame:
     | { gameID: string; invitee?: undefined }
     | { invitee: string; gameID?: undefined };
+  DummyMPGame: undefined;
 };
 
 const Stack = createStackNavigator<StackNavigatorParams>();
@@ -141,6 +143,11 @@ export default function Navigator(): ReactElement {
         <Stack.Screen
           name="MultiplayerGame"
           component={MultiplayerGame}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="DummyMPGame"
+          component={DummyMP}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

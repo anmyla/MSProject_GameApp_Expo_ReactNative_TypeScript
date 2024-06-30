@@ -1,0 +1,128 @@
+import React, { useState, useEffect } from "react";
+import { Text, View, TouchableOpacity, Alert } from "react-native";
+import Board from "../../../components/game-board/board";
+import styles from "../../../components/game/game.styles";
+import { useSounds } from "../../../utils";
+import MyButton from "../../../components/buttons/buttons";
+import { calculateWinner, isBoardFull } from "../../../utils";
+import { AntDesign } from '@expo/vector-icons';
+
+
+type GameProps = {};
+
+export const DummyGame: React.FC<GameProps> = () => {
+  
+  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [currentMove, setCurrentMove] = useState(0);
+  const [firstPlayerX, setFirstPlayerX] = useState(Math.random() < 0.5); 
+  const [player1Score, setPlayer1Score] = useState(0);
+  const [player2Score, setPlayer2Score] = useState(0);
+  const [draws, setDraws] = useState(0);
+  const [gameStarted, setGameStarted] = useState(false);
+  const [betweenGame, setBetweenGame] = useState(false);
+  const playSound = useSounds();
+
+
+  const xIsNext = currentMove % 2 === 0 ? firstPlayerX : !firstPlayerX;
+  const currentSquares = history[currentMove];
+
+  useEffect(() => {
+    if (!gameStarted) {
+      const alertMessage = firstPlayerX
+        ? "Player 1 (X) starts."
+        : "Player 2 (O) starts.";
+      Alert.alert("Game Start", alertMessage, [
+        { text: "OK", onPress: () => {} },
+      ]);
+      setGameStarted(true);
+    }
+  }, [gameStarted, firstPlayerX]);
+
+  const handlePlay = (square: number) => {
+    if (currentSquares[square] || calculateWinner(currentSquares)) {
+      return;
+    }
+
+    const nextSquares = currentSquares.slice();
+    nextSquares[square] = xIsNext ? "X" : "O";
+    const nextHistory = history.slice(0, currentMove + 1).concat([nextSquares]);
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
+    playSound(xIsNext ? "player1" : "player2");
+  };
+
+  const handleStepBack = () => {
+    if (currentMove > 0) {
+      setCurrentMove(currentMove - 1);
+    }
+  };
+
+  const handleStepForward = () => {
+    if (currentMove < history.length - 1) {
+      setCurrentMove(currentMove + 1);
+    }
+  };
+
+  const resetGame = () => {
+    setHistory([Array(9).fill(null)]);
+    setCurrentMove(0);
+    setFirstPlayerX(Math.random() < 0.5);
+    setGameStarted(false);
+    setBetweenGame(false);
+  };
+
+  const winner = !betweenGame && calculateWinner(currentSquares);
+  const isDraw = !winner && isBoardFull(currentSquares);
+
+  useEffect(() => {
+    if(!betweenGame)
+    if (winner) {
+      setBetweenGame(true);
+      if (winner === "X") {
+        setPlayer1Score(player1Score + 1);
+      } else if (winner === "O") {
+        setPlayer2Score(player2Score + 1);
+      }
+    } else if (isDraw) {
+      setBetweenGame(true);
+      setDraws(draws + 1);
+    }
+  }, [winner, isDraw]);
+
+  return (
+    <View style={styles.game}>
+      <View>
+        <Text style={styles.title}>TICTACTOE</Text>
+      </View>
+      <View style={styles.results}>
+        <View style={styles.resultsBox}>
+          <Text style={styles.resultsBoxText}>Player X</Text>
+          <Text style={styles.resultsBoxCount}>{player1Score}</Text>
+        </View>
+        <View style={styles.resultsBox}>
+          <Text style={styles.resultsBoxText}>Draws</Text>
+          <Text style={styles.resultsBoxCount}>{draws}</Text>
+        </View>
+        <View style={styles.resultsBox}>
+          <Text style={styles.resultsBoxText}>Player 0 </Text>
+          <Text style={styles.resultsBoxCount}>{player2Score}</Text>
+        </View>
+      </View>
+      <View style={styles.gameBoard}>
+        <Board state={currentSquares} onPlay={handlePlay} disabled={betweenGame} />
+      </View>
+      {betweenGame && (
+        <View style={styles.modal}>
+          <Text style={styles.modalText}>
+            {winner ? `Winner: ${winner}` : "It's a draw!"}
+          </Text>
+          <View style={styles.buttonContainer}>
+          <AntDesign name="caretleft" size={24} color="#f2f2f2" onPress={handleStepBack} style={styles.stepButton}/>
+           <MyButton title="Play Again" onPress={resetGame}/>
+           <AntDesign name="caretright" size={24} color="#f2f2f2" onPress={handleStepForward} style={styles.stepButton}/>
+          </View>
+        </View>
+      )}
+    </View>
+  );
+};

@@ -34,7 +34,7 @@ const styles = StyleSheet.create ({
         padding: 10,
         borderWidth: 1,
         borderColor: '#999',
-        width: 200,
+        width: 300,
 
       },
       modalText: {
@@ -111,6 +111,16 @@ const styles = StyleSheet.create ({
         alignSelf: 'center',
         marginTop: 5
       },
+      buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '100%',
+      },
+      stepButton: {
+      padding: 10,
+      borderRadius: 5,
+      marginHorizontal: 5,
+    },   
 
 });
 
