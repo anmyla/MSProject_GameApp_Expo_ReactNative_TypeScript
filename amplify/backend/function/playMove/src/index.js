@@ -4,17 +4,7 @@
 	API_TICTACTOE_GRAPHQLAPIKEYOUTPUT
 	ENV
 	REGION
-Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
-    API_TICTACTOE_GRAPHQLAPIENDPOINTOUTPUT
-    API_TICTACTOE_GRAPHQLAPIIDOUTPUT
-    API_TICTACTOE_GRAPHQLAPIKEYOUTPUT
-    ENV
-    REGION
 Amplify Params - DO NOT EDIT */
-
-/**
- * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
- */
 const appsync = require("aws-appsync");
 const gql = require("graphql-tag");
 require("cross-fetch/polyfill");
@@ -72,11 +62,10 @@ exports.handler = async event => {
     });
 
     const player = event.identity.username;
-    const gameID = event.identity.game;
-    const index = event.identity.index;
-    console.log(player, gameID, index);
+    const gameID = event.arguments.game;
+    const index = event.arguments.index;
 
-    //Get Game Object using id and make sure it exits
+    //1. Get game object from the id and make sure it exists
     const gameResponse = await graphqlClient.query({
         query: getGame,
         variables: {
@@ -86,16 +75,15 @@ exports.handler = async event => {
     const game = gameResponse.data.getGame;
     if (!game) {
         throw new Error("Game not found!");
-    };
+    }
 
-    //Make sure Game is active
+    //2. Make sure the game is active
     if (game.status !== "REQUESTED" && game.status !== "ACTIVE") {
         console.log("Game is not active!");
         throw new Error("Game is not active!");
-    };
+    }
 
-
-    //Check that the current user is a participant in th game and that it is her turn
+    //3. Check that the current use is a participant in the game and that it's his turn
     if (!game.owners.includes(player)) {
         console.log("Logged in player is not participating in this game!");
         throw new Error("Logged in player is not participating in this game!");
@@ -105,13 +93,13 @@ exports.handler = async event => {
         throw new Error("It's not your turn");
     }
 
-    //Make sire that the index is valid(not > than 8 and is empty)
+    //4. Make sure that the index is valid (not > 8 and not already occupied)
     if (index > 8 || game.state[index]) {
         console.log("Invalid index or cell is already occupied!");
         throw new Error("Invalid index or cell is already occupied!");
     }
 
-    //Update state, checkif the move is a terminal one and update the winner, status, turn, and state
+    //5. Update the state, check if the move is a terminal one & update the winner, status, turn & update the state
     const symbol = player === game.initiator ? "x" : "o";
     const nextTurn = game.owners.find(p => p !== game.turn);
     const invitee = game.owners.find(p => p !== game.initiator);
@@ -143,7 +131,6 @@ exports.handler = async event => {
         }
     });
 
-    //Return the updated game
+    //6. return the updated game
     return updateGameResponse.data.updateGame;
-
 };

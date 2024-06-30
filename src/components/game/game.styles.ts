@@ -1,6 +1,13 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create ({
+  logo: {
+    height: 140,
+    maxWidth: '100%',
+    resizeMode: 'contain',
+    marginTop: 0,
+    marginBottom: 0
+},
     gameInfo: {
         marginTop: 5,
       },
@@ -21,11 +28,12 @@ const styles = StyleSheet.create ({
       game: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: -70
+        marginTop: -90
 
       },
       gameBoard: {
         marginBottom: 5,
+        marginTop: -20,
       },
       modal: {
         alignSelf: 'center',
@@ -34,7 +42,7 @@ const styles = StyleSheet.create ({
         padding: 10,
         borderWidth: 1,
         borderColor: '#999',
-        width: 300,
+        width: 250,
 
       },
       modalText: {
@@ -81,6 +89,7 @@ const styles = StyleSheet.create ({
             paddingBottom: 10,
       },
       results: {
+        marginTop: 10,
         flexDirection: 'row',
         height: 100,
         alignSelf: 'center',

@@ -10,13 +10,13 @@ Amplify.configure(config);
 
 export default function App() {
   return (
-    <AuthProvider>
+  <AuthProvider>
       <AppBootStrap>
         <SettingsProvider>
           <Navigator />
         </SettingsProvider>
       </AppBootStrap>
-    </AuthProvider>
+   </AuthProvider>
   );
 }
 

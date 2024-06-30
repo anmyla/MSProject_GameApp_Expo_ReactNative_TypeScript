@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { ReactElement, useEffect, useState } from "react";
 import Board from "../game-board/board";
 import styles from "./game.styles";
@@ -6,17 +6,20 @@ import { BoardState, Square, isBoardEmpty } from "../../utils";
 import { isTerminal, getBestMove, useSounds } from "../../utils";
 import MyButton from "../buttons/buttons";
 import { useSettings, difficulty } from "../../contexts/settings-context";
+import { AntDesign } from "@expo/vector-icons";
 
 type GameProps = {};
 
 export default function Game({}: GameProps): ReactElement {
   const [state, setState] = useState<BoardState>(Array(9).fill(null));
-
   const [turn, setTurn] = useState<"HUMAN" | "BOT">(
     Math.random() < 0.5 ? "HUMAN" : "BOT"
   );
   const [isHumanMaximizing, setIsHumanMaximizing] = useState<boolean>(true);
   const gameResult = isTerminal(state);
+  const [betweenGame, setBetweenGame] = useState(false);
+  const [currentMove, setCurrentMove] = useState(0);
+  const [history, setHistory] = useState([Array(9).fill(null)]);
   const [winsCount, setWinsCount] = useState({
     wins: 0,
     losses: 0,
@@ -49,6 +52,11 @@ export default function Game({}: GameProps): ReactElement {
     } catch (error) {
       console.log("SOUND ERROR: " + error);
     }
+
+    // Update history
+    const nextHistory = history.slice(0, currentMove + 1).concat([stateCopy]);
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
   };
 
   const handlePlay = (square: number): void => {
@@ -71,22 +79,32 @@ export default function Game({}: GameProps): ReactElement {
 
   const newGame = () => {
     setState(Array(9).fill(null));
+    setHistory([Array(9).fill(null)]);
     setTurn(Math.random() < 0.5 ? "HUMAN" : "BOT");
+    setBetweenGame(false)
   };
+
   useEffect(() => {
     if (gameResult) {
+      setBetweenGame(true);
       const winner = getWinner(gameResult.winner);
       if (winner === "HUMAN") {
         playSound("win");
+        if(!betweenGame) {
         setWinsCount({ ...winsCount, wins: winsCount.wins + 1 });
+        }
       }
       if (winner === "BOT") {
         playSound("loss");
+        if(!betweenGame) {
         setWinsCount({ ...winsCount, losses: winsCount.losses + 1 });
+        }
       }
       if (winner === "DRAW") {
         playSound("draw");
+        if(!betweenGame) {
         setWinsCount({ ...winsCount, draws: winsCount.draws + 1 });
+        }
       }
     } else if (turn === "BOT") {
       if (isBoardEmpty(state)) {
@@ -103,11 +121,39 @@ export default function Game({}: GameProps): ReactElement {
     }
   }, [state, turn]);
 
+  const handleStepBack = () => {
+    if (currentMove > 0) {
+      setCurrentMove(currentMove - 1);
+      setState(history[currentMove - 1]);
+    }
+  };
+
+  const handleStepForward = () => {
+    if (currentMove < history.length - 1) {
+      setCurrentMove(currentMove + 1);
+      setState(history[currentMove + 1]);
+    }
+  };
+
+  const thisResult = () => {
+    if (gameResult) {
+      const winner = getWinner(gameResult.winner);
+      if (winner === "HUMAN") {
+        return "You Won!";
+      } else if (winner === "BOT") {
+        return "You Lost!";
+      } else {
+        return "It's a draw!";
+      }
+    }
+  };
+
   return (
     <View style={styles.game}>
-      <View>
-        <Text style={styles.title}>TICTACTOE</Text>
-      </View>
+      <Image
+        style={styles.logo}
+        source={require("../../../assets/images/logo2.png")}
+      />
       <View style={styles.difficulty}>
         <Text style={styles.difficultyText}>Level: {settings ? difficulty[settings.difficulty] : 'Breezy'}</Text>
       </View>
@@ -127,19 +173,31 @@ export default function Game({}: GameProps): ReactElement {
       </View>
       <View style={styles.gameBoard}>
         <Board
-          disabled={Boolean(isTerminal(state)) || turn !== "HUMAN"}
+          disabled={Boolean(isTerminal(state)) || turn !== "HUMAN" || betweenGame}
           state={state}
           onPlay={handlePlay} 
           />
       </View>
-      {gameResult && (
+      {betweenGame && (
         <View style={styles.modal}>
-          <Text style={styles.modalText}>
-            {getWinner(gameResult.winner) === "HUMAN" && "You Won!"}
-            {getWinner(gameResult.winner) === "BOT" && "You Lost!"}
-            {getWinner(gameResult.winner) === "DRAW" && "It's a draw!"}
-          </Text>
-          <MyButton style={styles.buttonModal1} title={"Play Again!"} onPress={() => newGame()}></MyButton>
+          <Text style={styles.modalText}>{thisResult()}</Text>
+          <View style={styles.buttonContainer}>
+            <AntDesign
+              name="caretleft"
+              size={24}
+              color="#f2f2f2"
+              onPress={handleStepBack}
+              style={styles.stepButton}
+            />
+            <MyButton title="Start" onPress={() => { newGame()}}/>
+            <AntDesign
+              name="caretright"
+              size={24}
+              color="#f2f2f2"
+              onPress={handleStepForward}
+              style={styles.stepButton}
+            />
+          </View>
         </View>
       )}
     </View>

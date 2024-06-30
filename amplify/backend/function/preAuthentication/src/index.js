@@ -4,22 +4,10 @@
 	API_TICTACTOE_GRAPHQLAPIKEYOUTPUT
 	ENV
 	REGION
-Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
-    API_TICTACTOE_GRAPHQLAPIENDPOINTOUTPUT
-    API_TICTACTOE_GRAPHQLAPIIDOUTPUT
-    API_TICTACTOE_GRAPHQLAPIKEYOUTPUT
-    ENV
-    REGION
 Amplify Params - DO NOT EDIT */
-
-/**
- * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
- */
-
 const appsync = require("aws-appsync");
 const gql = require("graphql-tag");
 require("cross-fetch/polyfill");
-
 
 exports.handler = async (event, context, callback) => {
     const graphqlClient = new appsync.AWSAppSyncClient({
@@ -45,22 +33,19 @@ exports.handler = async (event, context, callback) => {
     `;
 
     const mutation = gql`
-		mutation createPlayer(
-  			$username: String!
-  			$cognitoID: String!
-  			$name: String!
-  			$email: AWSEmail!
-		) {
-			createPlayer(input: { 
-				cognitoID: $cognitoID, 
-				email: $email, 
-				name: $name, 
-				username: $username 
-			}) {
-				id
-			}
-		}
-	`;
+        mutation createPlayer(
+            $name: String!
+            $cognitoID: String!
+            $username: String!
+            $email: AWSEmail!
+        ) {
+            createPlayer(
+                input: { cognitoID: $cognitoID, email: $email, name: $name, username: $username }
+            ) {
+                id
+            }
+        }
+    `;
 
     try {
         const response = await graphqlClient.query({
@@ -84,13 +69,10 @@ exports.handler = async (event, context, callback) => {
                 });
                 callback(null, event);
             } catch (error) {
-                console.error('Error executing pre Authentication confirmation:', error);
                 callback(error);
             }
         }
     } catch (error) {
-        console.error('Error executing pre Authentication check:', error);
         callback(error);
-
     }
 };

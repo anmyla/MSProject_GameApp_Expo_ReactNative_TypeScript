@@ -7,10 +7,10 @@ container: {
 },
 logo: {
     height: 150,
-    maxWidth: '90%',
+    maxWidth: '100%',
     resizeMode: 'contain',
     marginTop: 150,
-    marginBottom: 50
+    marginBottom: 10
 },
 button: {
     margin: 10

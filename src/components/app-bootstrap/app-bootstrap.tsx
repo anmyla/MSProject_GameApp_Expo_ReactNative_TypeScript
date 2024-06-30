@@ -5,14 +5,13 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import { Auth, Hub } from "aws-amplify";
 import { useAuth } from "../../contexts/auth-context";
 import * as Notifications from "expo-notifications";
 import { initNotifications } from "../../utils";
-
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({

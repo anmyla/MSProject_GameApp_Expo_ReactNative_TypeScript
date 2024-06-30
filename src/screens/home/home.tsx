@@ -32,23 +32,23 @@ export default function Home({ navigation }: HomeProps): ReactElement {
           <MyButton 
             onPress={() => {
               if(user){
-                navigation.navigate("MultiplayerHome");
-              }
-              else{
-                navigation.navigate("Login");
-              }
-            }}
-          title="Multi Player" style={styles.button} />
-          <MyButton 
-            onPress={() => {
-              if(user){
                 navigation.navigate("DummyMPGame");
               }
               else{
                 navigation.navigate("Login");
               }
             }}
-          title="Dummy Multiplayer" style={styles.button} />
+          title="Multiplayer" style={styles.button} />
+          <MyButton 
+            onPress={() => {
+              if(user){
+                navigation.navigate("MultiplayerHome");
+              }
+              else{
+                navigation.navigate("Login");
+              }
+            }}
+          title="Multi Player (Beta)" style={styles.button} />
           <MyButton
             loading={signingOut}
             title={user ? "Logout" : "Login"}

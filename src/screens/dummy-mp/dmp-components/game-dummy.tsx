@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, TouchableOpacity, Alert } from "react-native";
+import { Image, Text, View, Alert } from "react-native";
 import Board from "../../../components/game-board/board";
 import styles from "../../../components/game/game.styles";
-import { useSounds } from "../../../utils";
+import { isTerminal, useSounds } from "../../../utils";
 import MyButton from "../../../components/buttons/buttons";
 import { calculateWinner, isBoardFull } from "../../../utils";
 import { AntDesign } from '@expo/vector-icons';
@@ -29,12 +29,13 @@ export const DummyGame: React.FC<GameProps> = () => {
   useEffect(() => {
     if (!gameStarted) {
       const alertMessage = firstPlayerX
-        ? "Player 1 (X) starts."
-        : "Player 2 (O) starts.";
-      Alert.alert("Game Start", alertMessage, [
-        { text: "OK", onPress: () => {} },
+        ? "Player 1 (X) goes first."
+        : "Player 2 (O) goes first.";
+      Alert.alert("NEW GAME", alertMessage, [
+        { text: "OK", onPress: () => {}, style: 'destructive'},
       ]);
       setGameStarted(true);
+      setBetweenGame(false);
     }
   }, [gameStarted, firstPlayerX]);
 
@@ -68,7 +69,6 @@ export const DummyGame: React.FC<GameProps> = () => {
     setCurrentMove(0);
     setFirstPlayerX(Math.random() < 0.5);
     setGameStarted(false);
-    setBetweenGame(false);
   };
 
   const winner = !betweenGame && calculateWinner(currentSquares);
@@ -91,20 +91,21 @@ export const DummyGame: React.FC<GameProps> = () => {
 
   return (
     <View style={styles.game}>
-      <View>
-        <Text style={styles.title}>TICTACTOE</Text>
-      </View>
+       <Image
+        style={styles.logo}
+        source={require("../../../../assets/images/logo2.png")}
+      />
       <View style={styles.results}>
         <View style={styles.resultsBox}>
-          <Text style={styles.resultsBoxText}>Player X</Text>
+          <Text style={styles.resultsBoxText}>-  X  -</Text>
           <Text style={styles.resultsBoxCount}>{player1Score}</Text>
         </View>
         <View style={styles.resultsBox}>
-          <Text style={styles.resultsBoxText}>Draws</Text>
+          <Text style={styles.resultsBoxText}>Draw</Text>
           <Text style={styles.resultsBoxCount}>{draws}</Text>
         </View>
         <View style={styles.resultsBox}>
-          <Text style={styles.resultsBoxText}>Player 0 </Text>
+          <Text style={styles.resultsBoxText}>-  O  -</Text>
           <Text style={styles.resultsBoxCount}>{player2Score}</Text>
         </View>
       </View>
@@ -118,7 +119,7 @@ export const DummyGame: React.FC<GameProps> = () => {
           </Text>
           <View style={styles.buttonContainer}>
           <AntDesign name="caretleft" size={24} color="#f2f2f2" onPress={handleStepBack} style={styles.stepButton}/>
-           <MyButton title="Play Again" onPress={resetGame}/>
+           <MyButton title="Start" onPress={resetGame}/>
            <AntDesign name="caretright" size={24} color="#f2f2f2" onPress={handleStepForward} style={styles.stepButton}/>
           </View>
         </View>
