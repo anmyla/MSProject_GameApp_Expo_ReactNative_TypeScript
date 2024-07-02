@@ -27,7 +27,7 @@ export default function Game({}: GameProps): ReactElement {
   });
 
   const playSound = useSounds();
-  const {settings} = useSettings();
+  const { settings } = useSettings();
 
   /*
   //for debugging purposes
@@ -81,7 +81,7 @@ export default function Game({}: GameProps): ReactElement {
     setState(Array(9).fill(null));
     setHistory([Array(9).fill(null)]);
     setTurn(Math.random() < 0.5 ? "HUMAN" : "BOT");
-    setBetweenGame(false)
+    setBetweenGame(false);
   };
 
   useEffect(() => {
@@ -90,34 +90,40 @@ export default function Game({}: GameProps): ReactElement {
       const winner = getWinner(gameResult.winner);
       if (winner === "HUMAN") {
         playSound("win");
-        if(!betweenGame) {
-        setWinsCount({ ...winsCount, wins: winsCount.wins + 1 });
+        if (!betweenGame) {
+          setWinsCount({ ...winsCount, wins: winsCount.wins + 1 });
         }
       }
       if (winner === "BOT") {
         playSound("loss");
-        if(!betweenGame) {
-        setWinsCount({ ...winsCount, losses: winsCount.losses + 1 });
+        if (!betweenGame) {
+          setWinsCount({ ...winsCount, losses: winsCount.losses + 1 });
         }
       }
       if (winner === "DRAW") {
         playSound("draw");
-        if(!betweenGame) {
-        setWinsCount({ ...winsCount, draws: winsCount.draws + 1 });
+        if (!betweenGame) {
+          setWinsCount({ ...winsCount, draws: winsCount.draws + 1 });
         }
       }
     } else if (turn === "BOT") {
-      if (isBoardEmpty(state)) {
-        const posMoves = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-        const firstMove = posMoves[Math.floor(Math.random() * posMoves.length)];
-        move(firstMove, "X");
-        setIsHumanMaximizing(false);
-        setTurn("HUMAN");
-      } else {
-        const best = getBestMove(state, !isHumanMaximizing, 0, parseInt(settings ? settings.difficulty : '1'));
-        move(best, isHumanMaximizing ? "O" : "X");
-        setTurn("HUMAN");
-      }
+        if (isBoardEmpty(state)) {
+          const posMoves = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+          const firstMove =
+            posMoves[Math.floor(Math.random() * posMoves.length)];
+          move(firstMove, "X");
+          setIsHumanMaximizing(false);
+          setTurn("HUMAN");
+        } else {
+          const best = getBestMove(
+            state,
+            !isHumanMaximizing,
+            0,
+            parseInt(settings ? settings.difficulty : "1")
+          );
+          move(best, isHumanMaximizing ? "O" : "X");
+          setTurn("HUMAN");
+        }
     }
   }, [state, turn]);
 
@@ -155,7 +161,9 @@ export default function Game({}: GameProps): ReactElement {
         source={require("../../../assets/images/logo2.png")}
       />
       <View style={styles.difficulty}>
-        <Text style={styles.difficultyText}>Level: {settings ? difficulty[settings.difficulty] : 'Breezy'}</Text>
+        <Text style={styles.difficultyText}>
+          Level: {settings ? difficulty[settings.difficulty] : "Breezy"}
+        </Text>
       </View>
       <View style={styles.results}>
         <View style={styles.resultsBox}>
@@ -173,10 +181,12 @@ export default function Game({}: GameProps): ReactElement {
       </View>
       <View style={styles.gameBoard}>
         <Board
-          disabled={Boolean(isTerminal(state)) || turn !== "HUMAN" || betweenGame}
+          disabled={
+            Boolean(isTerminal(state)) || turn !== "HUMAN" || betweenGame
+          }
           state={state}
-          onPlay={handlePlay} 
-          />
+          onPlay={handlePlay}
+        />
       </View>
       {betweenGame && (
         <View style={styles.modal}>
@@ -189,7 +199,12 @@ export default function Game({}: GameProps): ReactElement {
               onPress={handleStepBack}
               style={styles.stepButton}
             />
-            <MyButton title="Start" onPress={() => { newGame()}}/>
+            <MyButton
+              title="Start"
+              onPress={() => {
+                newGame();
+              }}
+            />
             <AntDesign
               name="caretright"
               size={24}
