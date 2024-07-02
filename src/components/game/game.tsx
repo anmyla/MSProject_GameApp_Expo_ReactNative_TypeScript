@@ -107,23 +107,22 @@ export default function Game({}: GameProps): ReactElement {
         }
       }
     } else if (turn === "BOT") {
-        if (isBoardEmpty(state)) {
-          const posMoves = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-          const firstMove =
-            posMoves[Math.floor(Math.random() * posMoves.length)];
-          move(firstMove, "X");
-          setIsHumanMaximizing(false);
-          setTurn("HUMAN");
-        } else {
-          const best = getBestMove(
-            state,
-            !isHumanMaximizing,
-            0,
-            parseInt(settings ? settings.difficulty : "1")
-          );
-          move(best, isHumanMaximizing ? "O" : "X");
-          setTurn("HUMAN");
-        }
+      if (isBoardEmpty(state)) {
+        const posMoves = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        const firstMove = posMoves[Math.floor(Math.random() * posMoves.length)];
+        move(firstMove, "X");
+        setIsHumanMaximizing(false);
+        setTurn("HUMAN");
+      } else {
+        const best = getBestMove(
+          state,
+          !isHumanMaximizing,
+          0,
+          parseInt(settings ? settings.difficulty : "1")
+        );
+        move(best, isHumanMaximizing ? "O" : "X");
+        setTurn("HUMAN");
+      }
     }
   }, [state, turn]);
 
